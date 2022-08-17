@@ -1,0 +1,6 @@
+.squadBulletActive {
+  width: 26px;
+  border-radius: 4px;
+  background-image: linear-gradient(to right, #6dd683, #1ab65c);
+  opacity: 0.8;
+}

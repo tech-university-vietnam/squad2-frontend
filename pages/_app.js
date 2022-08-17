@@ -11,11 +11,28 @@ const theme = createTheme({
   },
 });
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import React from "react";
+import Head from "next/head";
+import { Box } from "@mui/material";
+
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={globalStore}>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          />
+        </Head>
+        <Box style={{ height: "100vh" }}>
+          <Component {...pageProps} />
+        </Box>
       </ThemeProvider>
     </Provider>
   );
