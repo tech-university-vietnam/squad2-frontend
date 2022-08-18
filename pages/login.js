@@ -1,7 +1,10 @@
+import Login from "../src/components/oauth/login";
+import Logout from "../src/components/oauth/logout";
+
 const LoginPage = () => {
   return (
     <div>
-      <h2>Login Page</h2>
+      <Login />
     </div>
   );
 };
