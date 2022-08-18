@@ -2,15 +2,17 @@ import "../styles/globals.css";
 import { Provider } from "react-redux";
 import { globalStore } from "../src/store/store";
 import { createTheme, ThemeProvider } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import { Box } from "@mui/material";
 
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { ThemeColor } from "../src/config/constants";
+import { GOOGLE_APP_ID, ThemeColor } from "../src/config/constants";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const theme = createTheme({
   components: {
@@ -50,7 +52,7 @@ const theme = createTheme({
   },
 });
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   return (
     <Provider store={globalStore}>
       <ThemeProvider theme={theme}>
@@ -67,11 +69,42 @@ function MyApp({ Component, pageProps }) {
             rel="stylesheet"
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
+          <script
+            src="https://apis.google.com/js/platform.js?onload=init"
+            async
+            defer
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+          
+           gapi.load('auth2', function() {
+    /* Ready. Make a call to gapi.auth2.init or some other API */
+  });
+          `,
+            }}
+          />
         </Head>
 
-        <Box style={{ height: "100vh" }}>
-          <Component {...pageProps} />
-        </Box>
+        <motion.div
+          key={router.route}
+          initial="initial"
+          animate="animate"
+          variants={{
+            initial: {
+              opacity: 0,
+            },
+            animate: {
+              opacity: 1,
+            },
+          }}
+        >
+          <Box style={{ height: "100vh" }}>
+            <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
+              <Component {...pageProps} />
+            </GoogleOAuthProvider>
+          </Box>
+        </motion.div>
       </ThemeProvider>
     </Provider>
   );
