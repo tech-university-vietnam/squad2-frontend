@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import { Box, Container, Typography } from "@mui/material";
+import routes from "../src/config/routes";
+import { useRouter } from "next/router";
 
 const SplashScreen = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => {
+      router.replace(routes.onboard);
+    }, 3000);
+  }, []);
   return (
     <Box
       height="100vh"
@@ -13,7 +22,7 @@ const SplashScreen = () => {
       sx={{
         backgroundSize: "cover",
         backgroundImage:
-          "url('https://images.unsplash.com/photo-1506953823976-52e1fdc0149a')",
+          "url('https://source.unsplash.com/random/1280x720?travel')",
       }}
     >
       <Container maxWidth="md">

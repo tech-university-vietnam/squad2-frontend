@@ -6,6 +6,8 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import styles from "../styles/Onboard.module.css";
 import { useRouter } from "next/router";
+import routes from "../src/config/routes";
+import { ThemeColor } from "../src/config/constants";
 
 const images = [
   {
@@ -91,18 +93,21 @@ const OnboardPage = () => {
         <Container maxWidth="md">
           <Stack spacing={2} my={2}>
             <Button
+              style={{ color: "white" }}
               size="large"
-              style={{ borderRadius: 50 }}
               variant="contained"
               onClick={handleNext}
             >
               Next
             </Button>
-            <Link href="/login">
+            <Link href={routes.login}>
               <Button
                 size="large"
-                style={{ borderRadius: 50 }}
                 variant="contained"
+                style={{
+                  backgroundColor: "#e8f8ef",
+                  color: ThemeColor.primary,
+                }}
               >
                 Skip
               </Button>
