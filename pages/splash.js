@@ -7,9 +7,11 @@ import routes from "../src/config/routes";
 const SplashScreen = () => {
   const router = useRouter();
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       router.replace(routes.welcome);
     }, 1000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   return (

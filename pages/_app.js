@@ -5,8 +5,9 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import React, { useEffect } from "react";
 import Head from "next/head";
 import { Box } from "@mui/material";
-
 import { motion } from "framer-motion";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -19,12 +20,24 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         disableElevation: true,
-        borderRadius: 50,
+        // borderRadius: 50,
+        root: {
+          borderRadius: 56,
+          height: 56,
+        },
       },
       defaultProps: {
         disableElevation: true,
         disableFocusRipple: true,
         disableRipple: true,
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          background: ThemeColor.grey,
+          borderRadius: 12,
+        },
       },
     },
   },
@@ -45,11 +58,12 @@ const theme = createTheme({
   palette: {
     primary: {
       main: ThemeColor.primary,
+      light: ThemeColor.light,
     },
   },
-  shape: {
-    borderRadius: 50,
-  },
+  // shape: {
+  //   borderRadius: 12,
+  // },
 });
 
 function MyApp({ Component, pageProps, router }) {
@@ -100,9 +114,11 @@ function MyApp({ Component, pageProps, router }) {
           }}
         >
           <Box style={{ height: "100vh" }}>
-            <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
-              <Component {...pageProps} />
-            </GoogleOAuthProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
+                <Component {...pageProps} />
+              </GoogleOAuthProvider>
+            </LocalizationProvider>
           </Box>
         </motion.div>
       </ThemeProvider>

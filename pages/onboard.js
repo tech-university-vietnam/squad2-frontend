@@ -3,7 +3,6 @@ import { Pagination, A11y } from "swiper";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
-import styled from "@emotion/styled";
 import styles from "../styles/Onboard.module.css";
 import { useRouter } from "next/router";
 import routes from "../src/config/routes";
@@ -27,8 +26,6 @@ const images = [
   },
 ];
 
-const Styled = styled.div``;
-
 const OnboardPage = () => {
   const [swiper, setSwiper] = useState();
   const router = useRouter();
@@ -43,7 +40,6 @@ const OnboardPage = () => {
     }
   };
   return (
-    <Styled>
       <Box
         display="flex"
         height="100vh"
@@ -72,7 +68,7 @@ const OnboardPage = () => {
                       component="img"
                       width="100%"
                       height="400px"
-                      style={{ objectFit: "cover" }}
+                      sx={{ objectFit: "cover" }}
                       src={image.img}
                       alt={image.title}
                     />
@@ -91,9 +87,9 @@ const OnboardPage = () => {
           </Swiper>
         </div>
         <Container maxWidth="md">
-          <Stack spacing={2} my={2}>
+          <Stack spacing={2} my={4}>
             <Button
-              style={{ color: "white" }}
+              sx={{ color: "white" }}
               size="large"
               variant="contained"
               onClick={handleNext}
@@ -105,7 +101,7 @@ const OnboardPage = () => {
                 size="large"
                 variant="contained"
                 style={{
-                  backgroundColor: "#e8f8ef",
+                  backgroundColor: ThemeColor.light,
                   color: ThemeColor.primary,
                 }}
               >
@@ -115,7 +111,6 @@ const OnboardPage = () => {
           </Stack>
         </Container>
       </Box>
-    </Styled>
   );
 };
 

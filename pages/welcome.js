@@ -3,14 +3,17 @@ import { Box, Container, Typography } from "@mui/material";
 import routes from "../src/config/routes";
 import { useRouter } from "next/router";
 
-const SplashScreen = () => {
+const Welcome = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       router.replace(routes.onboard);
     }, 3000);
+
+    return () => clearTimeout(timeout);
   }, []);
+
   return (
     <Box
       height="100vh"
@@ -26,13 +29,13 @@ const SplashScreen = () => {
       }}
     >
       <Container maxWidth="md">
-        <Typography variant="h4" style={{ color: "#ffffff" }}>
+        <Typography variant="h4" sx={{ color: "white" }}>
           Welcome to 👋
         </Typography>
-        <Typography variant="h1" style={{ color: "#00adb5" }}>
+        <Typography variant="h1" color="primary">
           Helia
         </Typography>
-        <Typography variant="subtitle1" style={{ color: "#ffffff" }}>
+        <Typography variant="subtitle1" sx={{ color: "white" }}>
           The best hotel booking in this century to accompany your vacation
         </Typography>
       </Container>
@@ -40,4 +43,4 @@ const SplashScreen = () => {
   );
 };
 
-export default SplashScreen;
+export default Welcome;
