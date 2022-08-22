@@ -6,10 +6,14 @@ import {
   Box,
   Button,
   Container,
+  Fab,
   FormControl,
   Input,
+  InputAdornment,
   InputBase,
   InputLabel,
+  MenuItem,
+  Select,
   Stack,
   TextField,
   Typography,
@@ -21,6 +25,9 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import styled from "@emotion/styled";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
+import MuiPhoneNumber from "material-ui-phone-number";
+import { ThemeColor } from "../src/config/constants";
 
 const CssTextField = styled(TextField)({
   // background: "#fafafa",
@@ -56,6 +63,7 @@ const ProfilePage = () => {
     register,
     reset,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm();
@@ -88,16 +96,100 @@ const ProfilePage = () => {
           <Typography variant="h6">Fill your profile</Typography>
         </Stack>
         <Stack alignItems="center" width="100%">
-          <Avatar sx={{ width: 128, height: 128 }} src={picture} />
-          <Stack width="100%" spacing={4} mt={6}>
+          <Box
+            sx={{ position: "relative", margin: "auto", width: "fit-content" }}
+          >
+            <Avatar
+              alt="Profile picture"
+              src={picture}
+              sx={{
+                width: 128,
+                height: 128,
+                margin: "auto",
+                boxShadow: "none",
+              }}
+            />
+            <Fab
+              color="primary"
+              aria-label="edit"
+              size="small"
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                borderRadius: "12px",
+                boxShadow: "none",
+              }}
+            >
+              <EditIcon sx={{ color: "white" }} />
+            </Fab>
+          </Box>
+          <Stack width="100%" spacing={2} mt={6}>
             <FormControl variant="filled">
-              <Input {...register("lastname", { required: true })} />
+              <CssTextField
+                fullWidth
+                {...register("lastname", { required: true })}
+              />
             </FormControl>
             <FormControl variant="filled">
-              <Input {...register("firstname", { required: true })} />
+              <CssTextField
+                fullWidth
+                {...register("firstname", { required: true })}
+              />
             </FormControl>
             <FormControl variant="filled">
-              <Input {...register("email", { required: true })} />
+              <CssTextField
+                fullWidth
+                id="email"
+                placeholder="Email"
+                type="email"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <EmailIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                {...register("email", { required: true })}
+              />
+            </FormControl>
+            <FormControl variant="filled">
+              <DesktopDatePicker
+                inputFormat="MM/dd/yyyy"
+                value={watch("date_of_birth")}
+                renderInput={(params) => <CssTextField fullWidth {...params} />}
+                onChange={(params) => {
+                  setValue("date_of_birth", params);
+                }}
+              />
+            </FormControl>
+            <FormControl variant="filled">
+              <MuiPhoneNumber
+                defaultCountry="vn"
+                // disableDropdown
+                onChange={(value) => console.log(value)}
+                variant="outlined"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    "& > fieldset": {
+                      borderWidth: 0,
+                    },
+                  },
+                }}
+              />
+            </FormControl>
+            <FormControl variant="filled">
+              <Select
+                placeholder="Gender"
+                fullWidth
+                id="gender"
+                input={<SelectInput />}
+                // value={value}
+                // onChange={handleChange}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
             </FormControl>
           </Stack>
         </Stack>
@@ -126,118 +218,5 @@ const ProfilePage = () => {
     </Container>
   );
 };
-
-// const Profile = () => {
-//   return (
-//     <Container maxWidth="md">
-//       {/* <Box
-//         display="flex"
-//         height="100vh"
-//         justifyContent="space-between"
-//         flexDirection="column"
-//       > */}
-//       <Box display="flex" alignItems="center" my={2}>
-//         <IconButton aria-label="back">
-//           <ArrowBackIcon />
-//         </IconButton>
-//         <Typography variant="h5">Fill Your Profile</Typography>
-//       </Box>
-//
-//       <Box sx={{ position: "relative", margin: "auto", width: "fit-content" }}>
-//         <Avatar
-//           alt="Profile picture"
-//           src="https://source.unsplash.com/random/320x320?person"
-//           sx={{ width: 180, height: 180, margin: "auto", boxShadow: "none" }}
-//         />
-//         <Fab
-//           color="primary"
-//           aria-label="edit"
-//           size="small"
-//           sx={{
-//             position: "absolute",
-//             bottom: 0,
-//             right: 0,
-//             borderRadius: "12px",
-//             boxShadow: "none",
-//           }}
-//         >
-//           <EditIcon sx={{ color: "white" }} />
-//         </Fab>
-//       </Box>
-//
-//       <Stack mt={2} spacing={2}>
-//         <CssTextField
-//           fullWidth
-//           id="first-name"
-//           placeholder="First Name"
-//           // value={value}
-//           // onChange={handleChange}
-//         />
-//         <CssTextField
-//           fullWidth
-//           id="last-name"
-//           placeholder="Last Name"
-//           // value={value}
-//           // onChange={handleChange}
-//         />
-//         <DesktopDatePicker
-//           inputFormat="MM/dd/yyyy"
-//           // value={value}
-//           // onChange={handleChange}
-//           renderInput={(params) => (
-//             <CssTextField id="date-of-birth" fullWidth {...params} />
-//           )}
-//         />
-//         <CssTextField
-//           fullWidth
-//           id="email"
-//           placeholder="Email"
-//           type="email"
-//           InputProps={{
-//             endAdornment: (
-//               <InputAdornment position="end">
-//                 <EmailIcon />
-//               </InputAdornment>
-//             ),
-//           }}
-//         />
-//         {/* TODO: Change style */}
-//         <MuiPhoneNumber
-//           defaultCountry="vn"
-//           // disableDropdown
-//           onChange={(value) => console.log(value)}
-//           variant="outlined"
-//           sx={{
-//             "& .MuiInputBase-root": {
-//               "& > fieldset": {
-//                 borderWidth: 0,
-//               },
-//             },
-//           }}
-//         />
-//         <Select
-//           placeholder="Gender"
-//           fullWidth
-//           id="gender"
-//           input={<SelectInput />}
-//           // value={value}
-//           // onChange={handleChange}
-//         >
-//           <MenuItem value="male">Male</MenuItem>
-//           <MenuItem value="female">Female</MenuItem>
-//         </Select>
-//         <Button
-//           sx={{ color: "white", height: 56 }}
-//           size="large"
-//           variant="contained"
-//           // onClick={handleContinue}
-//         >
-//           Continue
-//         </Button>
-//       </Stack>
-//       {/* </Box> */}
-//     </Container>
-//   );
-// };
 
 export default ProfilePage;
