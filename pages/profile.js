@@ -201,6 +201,9 @@ const ProfilePage = () => {
                       },
                     },
                   }}
+                  onChange={(e) => {
+                    setValue("phone_number", e.target.value);
+                  }}
                   {...register("phone_number", {
                     required: "Please input your phone number",
                   })}
