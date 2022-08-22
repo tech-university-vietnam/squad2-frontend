@@ -3,7 +3,8 @@ export const API_URL = "";
 export const ThemeColor = {
   primary: "#1AB65C",
   light: "#e8f8ef",
-  grey: "#fafafa"
+  grey: "#fafafa",
+  danger: "#dc3545",
 };
 
 export const GOOGLE_APP_ID =
