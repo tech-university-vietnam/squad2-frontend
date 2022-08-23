@@ -24,7 +24,6 @@ import styled from "@emotion/styled";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { ThemeColor } from "../src/config/constants";
 import ErrorField from "../src/components/ErrorField";
-import dynamic from "next/dynamic";
 import MuiPhoneNumber from "material-ui-phone-number-2";
 
 const CssTextField = styled(TextField)({
@@ -77,8 +76,11 @@ const ProfilePage = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm();
-  console.log(errors);
+  } = useForm({
+    defaultValues: {
+      gender: "male",
+    },
+  });
   const onSubmit = (data) => console.log(data);
 
   useEffect(() => {
@@ -86,6 +88,7 @@ const ProfilePage = () => {
       lastname: family_name,
       firstname: given_name,
       email,
+      gender: "male",
     });
   }, [router.query]);
 
@@ -210,34 +213,17 @@ const ProfilePage = () => {
                     setValue("phone_number", value);
                   }}
                 />
-                {/*<MuiPhoneNumber*/}
-                {/*  defaultCountry="vn"*/}
-                {/*  // disableDropdown*/}
-                {/*  variant="outlined"*/}
-                {/*  sx={{*/}
-                {/*    "& .MuiInputBase-root": {*/}
-                {/*      "& > fieldset": {*/}
-                {/*        borderWidth: 0,*/}
-                {/*      },*/}
-                {/*    },*/}
-                {/*  }}*/}
-                {/*  onChange={(e) => {*/}
-                {/*    setValue("phone_number", e.target.value);*/}
-                {/*  }}*/}
-                {/*/>*/}
                 <ErrorField attribute={errors?.phone_number} />
               </FormControl>
               <FormControl variant="filled">
                 <Select
                   placeholder="Gender"
                   fullWidth
-                  id="gender"
-                  input={<SelectInput />}
-                  // value={value}
-                  // onChange={handleChange}
                   {...register("gender", {
                     required: "Please input your gender",
                   })}
+                  value={watch("gender")}
+                  input={<SelectInput />}
                 >
                   <MenuItem value="male">Male</MenuItem>
                   <MenuItem value="female">Female</MenuItem>
