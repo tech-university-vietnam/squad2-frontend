@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 import routes from "../src/config/routes";
 import { useEffect } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import { GOOGLE_APP_ID } from "../src/config/constants";
-import GoogleLogin from "react-google-login";
 import { getUserProfileData } from "../src/config/utils";
 
 const LoginPage = () => {
