@@ -1885,10 +1885,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-material-ui-phone-number@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/material-ui-phone-number/-/material-ui-phone-number-3.0.0.tgz#4ea0d045f50af26db0994816520095be57d20dc1"
-  integrity sha512-wZX1PYv990nJUBko93AQxIfvFARHfMtnV/UT1/hVnbJP5x/K7MDuT5T2/ckIG6xyqTZ/wCcHdEK1P60uTOORwA==
+material-ui-phone-number-2@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/material-ui-phone-number-2/-/material-ui-phone-number-2-1.2.7.tgz#614d73cb5f4ba46ea442fb9fd125b7091c2a416d"
+  integrity sha512-PhCbCAb2yLbd4m0UL5NdvdrDuSC2z1rJ+fUHkS7rp5hmx/4q4+Xmt17FLyZf8x9KiqKgld0PIMbgDHpkFkebiQ==
   dependencies:
     country-flag-icons "^1.4.10"
     lodash "^4.17.21"

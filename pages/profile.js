@@ -1,6 +1,5 @@
 import EmailIcon from "@mui/icons-material/Email";
 import EditIcon from "@mui/icons-material/Edit";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
   Avatar,
   Box,
@@ -8,10 +7,8 @@ import {
   Container,
   Fab,
   FormControl,
-  Input,
   InputAdornment,
   InputBase,
-  InputLabel,
   MenuItem,
   Select,
   Stack,
@@ -23,12 +20,12 @@ import { useRouter } from "next/router";
 import routes from "../src/config/routes";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { FcGoogle } from "react-icons/fc";
 import styled from "@emotion/styled";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import MuiPhoneNumber from "material-ui-phone-number";
 import { ThemeColor } from "../src/config/constants";
 import ErrorField from "../src/components/ErrorField";
+import dynamic from "next/dynamic";
+import MuiPhoneNumber from "material-ui-phone-number-2";
 
 const CssTextField = styled(TextField)({
   // background: "#fafafa",
@@ -43,6 +40,12 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
+const StyledMuiPhoneNumber = styled(MuiPhoneNumber)`
+  input {
+    padding-left: 8px !important;
+  }
+`;
 
 const SelectInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -190,9 +193,8 @@ const ProfilePage = () => {
                 <ErrorField attribute={errors?.date_of_birth} />
               </FormControl>
               <FormControl variant="filled">
-                <MuiPhoneNumber
+                <StyledMuiPhoneNumber
                   defaultCountry="vn"
-                  // disableDropdown
                   variant="outlined"
                   sx={{
                     "& .MuiInputBase-root": {
@@ -201,13 +203,28 @@ const ProfilePage = () => {
                       },
                     },
                   }}
-                  onChange={(e) => {
-                    setValue("phone_number", e.target.value);
-                  }}
                   {...register("phone_number", {
                     required: "Please input your phone number",
                   })}
+                  onChange={(value) => {
+                    setValue("phone_number", value);
+                  }}
                 />
+                {/*<MuiPhoneNumber*/}
+                {/*  defaultCountry="vn"*/}
+                {/*  // disableDropdown*/}
+                {/*  variant="outlined"*/}
+                {/*  sx={{*/}
+                {/*    "& .MuiInputBase-root": {*/}
+                {/*      "& > fieldset": {*/}
+                {/*        borderWidth: 0,*/}
+                {/*      },*/}
+                {/*    },*/}
+                {/*  }}*/}
+                {/*  onChange={(e) => {*/}
+                {/*    setValue("phone_number", e.target.value);*/}
+                {/*  }}*/}
+                {/*/>*/}
                 <ErrorField attribute={errors?.phone_number} />
               </FormControl>
               <FormControl variant="filled">
