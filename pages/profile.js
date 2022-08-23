@@ -78,7 +78,7 @@ const ProfilePage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      gender: "male",
+      gender: "",
     },
   });
   const onSubmit = (data) => console.log(data);
@@ -88,7 +88,7 @@ const ProfilePage = () => {
       lastname: family_name,
       firstname: given_name,
       email,
-      gender: "male",
+      gender: "",
     });
   }, [router.query]);
 
@@ -218,13 +218,20 @@ const ProfilePage = () => {
               <FormControl variant="filled">
                 <Select
                   placeholder="Gender"
+                  displayEmpty
                   fullWidth
                   {...register("gender", {
                     required: "Please input your gender",
+                    validate: (value) => {
+                      console.log(value);
+                    },
                   })}
                   value={watch("gender")}
                   input={<SelectInput />}
                 >
+                  <MenuItem value="">
+                    <span style={{ opacity: 0.7 }}>Select your gender</span>
+                  </MenuItem>
                   <MenuItem value="male">Male</MenuItem>
                   <MenuItem value="female">Female</MenuItem>
                 </Select>
