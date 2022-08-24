@@ -27,7 +27,7 @@ const BottomNav = () => {
         onChange={handleChange}
       >
         {navList.map((nav) => (
-          <BottomNavigationAction icon={nav.icon} label={nav.label} />
+          <BottomNavigationAction icon={nav.icon} label={nav.label} key={nav.route} />
         ))}
       </BottomNavigation>
     </Paper>

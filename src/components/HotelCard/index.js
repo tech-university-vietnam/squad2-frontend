@@ -18,6 +18,7 @@ const HotelCard = ({
   review,
   price,
   bookmarked,
+  image,
   ...rest
 }) => {
   return (
@@ -32,7 +33,7 @@ const HotelCard = ({
     >
       <CardMedia
         component="img"
-        image="/logo.png"
+        image={image}
         alt="Hotel image"
         sx={{ width: 86, height: 86, my: 2, ml: 2, borderRadius: 2 }}
       />
