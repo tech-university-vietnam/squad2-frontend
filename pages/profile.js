@@ -81,7 +81,10 @@ const ProfilePage = () => {
       gender: "",
     },
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    router.push(routes.home);
+  };
 
   useEffect(() => {
     reset({
