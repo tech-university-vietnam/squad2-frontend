@@ -189,6 +189,7 @@ const ProfilePage = () => {
                   renderInput={(params) => (
                     <CssTextField fullWidth {...params} />
                   )}
+                  onChange={(value) => setValue("date_of_birth", value)}
                   {...register("date_of_birth", {
                     required: "Please input your date of birth",
                   })}
