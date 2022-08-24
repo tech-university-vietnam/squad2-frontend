@@ -89,7 +89,7 @@ const Home = () => {
             review={1234}
             price="$26"
             bookmarked={idx % 2 == 0}
-            image="/logo.png"
+            image={"https://source.unsplash.com/random/?hotel"}
             key={idx}
           />
         ))}

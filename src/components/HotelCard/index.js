@@ -4,12 +4,15 @@ import {
   CardContent,
   CardMedia,
   Stack,
+  styled,
   Typography,
 } from "@mui/material";
 import React from "react";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import StarIcon from "@mui/icons-material/Star";
+
+const StyledCard = styled(Card)``;
 
 const HotelCard = ({
   name,
@@ -29,6 +32,7 @@ const HotelCard = ({
         alignItems: "center",
         mb: 2,
       }}
+      elevation={12}
       {...rest}
     >
       <CardMedia
