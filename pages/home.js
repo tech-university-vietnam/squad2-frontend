@@ -17,6 +17,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import HotelCard from "../src/components/HotelCard";
 import ChipGroup from "../src/components/ChipGroup";
 import BottomNav from "../src/components/BottomNav";
+import withAuth from "../src/hooks/withAuth";
 
 const CssTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
@@ -35,7 +36,7 @@ const Home = () => {
   const [filter, setFilter] = useState(0);
 
   return (
-    <Container maxWidth="md" sx={{ height: "100vh", pt: 2, pb: 16 }}>
+    <>
       <Box display="flex" justifyContent="space-between" py={2}>
         <Box display="flex">
           <Avatar
@@ -94,9 +95,8 @@ const Home = () => {
           />
         ))}
       </Box>
-      <BottomNav />
-    </Container>
+    </>
   );
 };
 
-export default Home;
+export default withAuth(Home);

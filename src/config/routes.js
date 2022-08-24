@@ -7,6 +7,7 @@ const routes = {
   splash: "/splash",
   welcome: "/welcome",
   profile: "/profile",
+  account: "/account",
 };
 
 export default routes;

@@ -13,7 +13,7 @@ const BottomNav = () => {
     { label: "Home", route: routes.home, icon: <HomeIcon /> },
     { label: "Search", route: routes.search, icon: <SearchIcon /> },
     { label: "Booking", route: routes.booking, icon: <ArticleIcon /> },
-    { label: "Profile", route: routes.profile, icon: <PersonIcon /> },
+    { label: "Profile", route: routes.account, icon: <PersonIcon /> },
   ];
   const selectedIndex = navList.findIndex((nav) => nav.route === router.asPath);
   const handleChange = (event, newIndex) =>
@@ -27,7 +27,11 @@ const BottomNav = () => {
         onChange={handleChange}
       >
         {navList.map((nav) => (
-          <BottomNavigationAction icon={nav.icon} label={nav.label} key={nav.route} />
+          <BottomNavigationAction
+            icon={nav.icon}
+            label={nav.label}
+            key={nav.route}
+          />
         ))}
       </BottomNavigation>
     </Paper>

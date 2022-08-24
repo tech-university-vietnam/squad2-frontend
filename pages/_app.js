@@ -14,6 +14,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { GOOGLE_APP_ID, ThemeColor } from "../src/config/constants";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import AppLayout from "../src/provider/AppLayout";
 
 const theme = createTheme({
   components: {
@@ -114,11 +115,13 @@ function MyApp({ Component, pageProps, router }) {
           }}
         >
           <Box style={{ height: "100vh" }}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
-                <Component {...pageProps} />
-              </GoogleOAuthProvider>
-            </LocalizationProvider>
+            <AppLayout>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
+                  <Component {...pageProps} />
+                </GoogleOAuthProvider>
+              </LocalizationProvider>
+            </AppLayout>
           </Box>
         </motion.div>
       </ThemeProvider>
