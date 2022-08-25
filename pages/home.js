@@ -72,7 +72,7 @@ const Home = () => {
       </Box>
 
       <Box p={2} pt={10}>
-        <Typography variant="h5" mb={2}>
+        <Typography variant="h5" fontWeight={700} mb={2}>
           Hello, {name} 👋!
         </Typography>
 
