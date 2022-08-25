@@ -14,7 +14,7 @@ const LoginPage = () => {
       getUserProfileData(tokenResponse?.access_token).then((response) => {
         router.push({
           pathname: routes.profile,
-          query: { ...response },
+          query: { ...response, access_token: tokenResponse?.access_token },
         });
       });
     },

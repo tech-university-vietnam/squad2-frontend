@@ -5,18 +5,19 @@ import { useAppLayout } from "../provider/AppLayout";
 
 const withAuth = (Component) => {
   const AuthenticatedComponent = () => {
-    const router = useRouter();
     const { isLoggedIn } = useAppLayout();
-    const check = async () => {
+
+    useEffect(() => {
+      if (isLoggedIn === undefined) {
+        return;
+      }
+
       if (!isLoggedIn) {
         router.push(routes.login);
       } else {
-        router.push(routes.home);
+        // router.push(routes.home);
       }
-    };
-    useEffect(() => {
-      check();
-    }, []);
+    }, [isLoggedIn]);
 
     return !!isLoggedIn ? <Component /> : null;
   };

@@ -1,5 +1,12 @@
+import { useAppLayout } from "../src/provider/AppLayout";
+
 const AccountPage = () => {
-  return <div />;
+  const { logout } = useAppLayout();
+  return (
+    <div>
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
 };
 
 export default AccountPage;

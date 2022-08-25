@@ -7,5 +7,9 @@ export const ThemeColor = {
   danger: "#dc3545",
 };
 
+export const COOKIES = {
+  ACCESS_TOKEN: "access_token",
+};
+
 export const GOOGLE_APP_ID =
   "722490053093-vo7kav44uk2i1vkbvsoe4hkubiuh0inq.apps.googleusercontent.com";

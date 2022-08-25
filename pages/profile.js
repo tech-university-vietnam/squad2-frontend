@@ -22,9 +22,10 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import { ThemeColor } from "../src/config/constants";
+import { COOKIES, ThemeColor } from "../src/config/constants";
 import ErrorField from "../src/components/ErrorField";
 import MuiPhoneNumber from "material-ui-phone-number-2";
+import { setCookie } from "cookies-next";
 
 const CssTextField = styled(TextField)({
   // background: "#fafafa",
@@ -67,7 +68,8 @@ const ScrollableStack = styled(Stack)`
 
 const ProfilePage = () => {
   const router = useRouter();
-  const { family_name, given_name, picture, email } = router.query;
+  const { family_name, given_name, picture, email, access_token } =
+    router.query;
   const {
     getValues,
     register,
@@ -81,8 +83,10 @@ const ProfilePage = () => {
       gender: "",
     },
   });
+
   const onSubmit = (data) => {
     console.log(data);
+    setCookie(COOKIES.ACCESS_TOKEN, access_token);
     router.push(routes.home);
   };
 
