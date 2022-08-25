@@ -70,44 +70,46 @@ const Home = () => {
         </Box>
       </Box>
 
-      <Typography variant="h5" mb={2}>
-        Hello, {name} 👋!
-      </Typography>
+      <Box p={2} pt={10}>
+        <Typography variant="h5" mb={2}>
+          Hello, {name} 👋!
+        </Typography>
 
-      <CssTextField
-        fullWidth
-        id="email"
-        placeholder="Email"
-        type="email"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end" sx={{ color: ThemeColor.primary }}>
-              <FilterListIcon />
-            </InputAdornment>
-          ),
-        }}
-      />
+        <CssTextField
+          fullWidth
+          id="email"
+          placeholder="Email"
+          type="email"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end" sx={{ color: ThemeColor.primary }}>
+                <FilterListIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
 
-      <ChipGroup value={filter} labels={filters} setValue={setFilter} />
+        <ChipGroup value={filter} labels={filters} setValue={setFilter} />
 
-      <Box pb={8}>
-        {Array.from(Array(10)).map((_, idx) => (
-          <HotelCard
-            name="President Hotel"
-            address="Paris, France"
-            rating={4.6}
-            review={1234}
-            price="$26"
-            bookmarked={idx % 2 == 0}
-            image={"https://source.unsplash.com/random/?hotel"}
-            key={idx}
-          />
-        ))}
+        <Box pb={8}>
+          {Array.from(Array(10)).map((_, idx) => (
+            <HotelCard
+              name="President Hotel"
+              address="Paris, France"
+              rating={4.6}
+              review={1234}
+              price="$26"
+              bookmarked={idx % 2 == 0}
+              image={"https://source.unsplash.com/random/?hotel"}
+              key={idx}
+            />
+          ))}
+        </Box>
       </Box>
     </>
   );

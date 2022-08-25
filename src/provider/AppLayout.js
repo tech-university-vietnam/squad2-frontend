@@ -42,9 +42,9 @@ const AppLayout = ({ children }) => {
 
   return (
     <AppLayoutContext.Provider value={{ isLoggedIn, logout }}>
-      <Container maxWidth="md" sx={{ height: "100vh", pt: 2, pb: 16 }}>
+      <Container maxWidth="md" sx={{ height: "100vh", p: 0 }}>
         {children}
-        {isLoggedIn && <BottomNav />}
+        {isLoggedIn && router.asPath == routes.home && <BottomNav />}
       </Container>
     </AppLayoutContext.Provider>
   );

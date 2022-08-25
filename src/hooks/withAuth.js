@@ -6,6 +6,7 @@ import { useAppLayout } from "../provider/AppLayout";
 const withAuth = (Component) => {
   const AuthenticatedComponent = () => {
     const { isLoggedIn } = useAppLayout();
+    const router = useRouter();
 
     useEffect(() => {
       if (isLoggedIn === undefined) {
