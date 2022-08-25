@@ -1,4 +1,5 @@
 import { useAppLayout } from "../src/provider/AppLayout";
+import withAuth from "../src/hooks/withAuth";
 
 const AccountPage = () => {
   const { logout } = useAppLayout();
@@ -9,4 +10,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default withAuth(AccountPage);
