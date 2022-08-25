@@ -40,11 +40,16 @@ const AppLayout = ({ children }) => {
     };
   }, []);
 
+  const noDisplay =
+    router.asPath === routes.splash ||
+    router.asPath === routes.welcome ||
+    router.asPath === routes.login;
+
   return (
     <AppLayoutContext.Provider value={{ isLoggedIn, logout }}>
       <Container maxWidth="md" sx={{ height: "100vh", p: 0 }}>
         {children}
-        {isLoggedIn && router.asPath == routes.home && <BottomNav />}
+        {isLoggedIn && !noDisplay && <BottomNav />}
       </Container>
     </AppLayoutContext.Provider>
   );
