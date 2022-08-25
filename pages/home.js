@@ -35,8 +35,22 @@ const Home = () => {
   const [filter, setFilter] = useState(0);
 
   return (
-    <Container maxWidth="md" sx={{ height: "100vh", pt: 2, pb: 16 }}>
-      <Box display="flex" justifyContent="space-between" py={2}>
+    <Container maxWidth="md" sx={{ height: "100vh", pt: 10, pb: 16 }}>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        pb={2}
+        pt={3}
+        px={2}
+        sx={{
+          position: "fixed",
+          top: 0,
+          right: 0,
+          left: 0,
+          bgcolor: "white",
+          zIndex: 999,
+        }}
+      >
         <Box display="flex">
           <Avatar
             sx={{ bgcolor: ThemeColor.primary, width: 40, height: 40, mr: 1.5 }}
