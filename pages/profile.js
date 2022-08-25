@@ -86,7 +86,7 @@ const ProfilePage = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    setCookie(COOKIES.ACCESS_TOKEN, access_token);
+    setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
     router.push(routes.home);
   };
 

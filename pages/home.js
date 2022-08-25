@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Container,
   IconButton,
   InputAdornment,
   styled,
@@ -16,8 +15,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import HotelCard from "../src/components/HotelCard";
 import ChipGroup from "../src/components/ChipGroup";
-import BottomNav from "../src/components/BottomNav";
 import withAuth from "../src/hooks/withAuth";
+import useHotels from "../src/services/useHotels";
 
 const CssTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
@@ -34,7 +33,9 @@ const Home = () => {
   const name = "Daniel";
   const filters = ["Recommended", "Popular", "Trending"];
   const [filter, setFilter] = useState(0);
+  const { loading, data } = useHotels();
 
+  console.log(loading, data);
   return (
     <>
       <Box
