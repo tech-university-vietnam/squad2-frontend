@@ -8,6 +8,7 @@ const routes = {
   welcome: "/welcome",
   profile: "/profile",
   account: "/account",
+  hotel_detail: (id) => `/hotels/${id}`,
 };
 
 export default routes;
