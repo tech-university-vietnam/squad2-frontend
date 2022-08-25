@@ -46,14 +46,16 @@ const HotelCard = ({
         sx={{ display: "flex", justifyContent: "space-between", flex: 1 }}
       >
         <Box display="flex" flexDirection="column">
-          <Typography variant="h6" color="primary">
+          <Typography variant="h6" fontWeight={700} color="black">
             {name}
           </Typography>
           <Typography variant="body1">{address}</Typography>
-          <Stack spacing={0.5} direction="row">
+          <Stack spacing={0.5} direction="row" alignItems="flex-end">
             <StarIcon sx={{ color: "yellow" }} />
-            <Typography>{rating}</Typography>
-            <Typography>
+            <Typography color="primary" fontWeight={600}>
+              {rating}
+            </Typography>
+            <Typography marginTop={12} variant="caption" color="gray">
               ({review > 1 ? `${review} reviews` : `${review} review`})
             </Typography>
           </Stack>
@@ -63,7 +65,9 @@ const HotelCard = ({
           <Typography variant="h6" color="primary">
             {price}
           </Typography>
-          <Typography variant="body1">/night</Typography>
+          <Typography color="gray" align="right" variant="caption">
+            / night
+          </Typography>
           {bookmarked ? (
             <BookmarkIcon color="primary" />
           ) : (

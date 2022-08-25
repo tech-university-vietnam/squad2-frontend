@@ -18,6 +18,7 @@ const withAuth = (Component) => {
       } else {
         // router.push(routes.home);
       }
+      1;
     }, [isLoggedIn]);
 
     return !!isLoggedIn ? <Component /> : null;
