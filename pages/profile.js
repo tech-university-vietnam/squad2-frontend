@@ -26,6 +26,7 @@ import { COOKIES, ThemeColor } from "../src/config/constants";
 import ErrorField from "../src/components/ErrorField";
 import MuiPhoneNumber from "material-ui-phone-number-2";
 import { setCookie } from "cookies-next";
+import { useCreateUser } from "../src/services/useRegister";
 
 const CssTextField = styled(TextField)({
   // background: "#fafafa",
@@ -84,10 +85,24 @@ const ProfilePage = () => {
     },
   });
 
+  const createUserInput = (() => {
+    const { lastname, firstname, gender, email, phone_number, date_of_birth } =
+      getValues();
+    return {
+      firstName: firstname,
+      lastName: lastname,
+      gender: gender.toLocaleUpperCase(),
+      email,
+      phone: phone_number,
+    };
+  })();
+
+  const [createUser, { loading, data, error }] = useCreateUser(createUserInput);
+
   const onSubmit = (data) => {
-    console.log(data);
     setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
-    router.push(routes.home);
+    createUser();
+    if (!error) router.push(routes.home);
   };
 
   useEffect(() => {
@@ -249,13 +264,15 @@ const ProfilePage = () => {
               </FormControl>
             </Stack>
           </ScrollableStack>
-          <div
-            style={{
+          <Container
+            maxWidth="md"
+            sx={{
               position: "absolute",
               width: "100%",
               bottom: 32,
               left: 0,
-              padding: "0 8px",
+              right: 0,
+              padding: 2,
             }}
           >
             <Button
@@ -270,7 +287,7 @@ const ProfilePage = () => {
             >
               Continue
             </Button>
-          </div>
+          </Container>
         </Box>
       </Container>
     </form>
