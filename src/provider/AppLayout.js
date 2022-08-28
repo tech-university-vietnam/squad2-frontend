@@ -11,25 +11,37 @@ const AppLayoutContext = React.createContext();
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(undefined);
   const router = useRouter();
-  const { data: currentUser } = useCurrentUser();
+  const { data: currentUser, refetch } = useCurrentUser();
 
-  const checkAuth = () => {
-    const accessToken = getCookie(COOKIES.ACCESS_TOKEN);
-    if (!accessToken || accessToken === "") {
-    } else {
-      if (currentUser?.data?.currentUser) {
-        setIsLoggedIn(true);
-        return;
+  const checkAuth = async () => {
+    try {
+      const _currentUser = await refetch();
+      const accessToken = getCookie(COOKIES.ACCESS_TOKEN);
+      if (!accessToken || accessToken === "") {
+      } else {
+        if (_currentUser?.data?.currentUser?.id) {
+          setIsLoggedIn(true);
+          return;
+        }
       }
+      setIsLoggedIn(false);
+    } catch (e) {
+      setIsLoggedIn(false);
     }
-    setIsLoggedIn(false);
   };
 
   const logout = () => {
     setIsLoggedIn(false);
     deleteCookie(COOKIES.ACCESS_TOKEN);
-    router.push(routes.login);
+    window.location.href = routes.login;
   };
+
+  const noDisplay =
+    router.asPath === routes.splash ||
+    router.asPath === routes.welcome ||
+    router.asPath === routes.onboard ||
+    router.asPath === routes.profile ||
+    router.asPath === routes.login;
 
   useEffect(() => {
     checkAuth();
@@ -45,12 +57,15 @@ const AppLayout = ({ children }) => {
     };
   }, []);
 
-  const noDisplay =
-    router.asPath === routes.splash ||
-    router.asPath === routes.welcome ||
-    router.asPath === routes.onboard ||
-    router.asPath === routes.profile ||
-    router.asPath === routes.login;
+  useEffect(() => {
+    if (currentUser?.currentUser?.id) {
+      setIsLoggedIn(true);
+      console.log(router.asPath, routes.home);
+      if (noDisplay && router.asPath !== routes.home) {
+        router.push(routes.home);
+      }
+    }
+  }, [currentUser?.currentUser?.id]);
 
   return (
     <AppLayoutContext.Provider value={{ isLoggedIn, logout }}>

@@ -17,6 +17,7 @@ import HotelCard from "../src/components/HotelCard";
 import ChipGroup from "../src/components/ChipGroup";
 import withAuth from "../src/hooks/withAuth";
 import useHotels from "../src/services/useHotels";
+import useCurrentUser from "../src/services/userCurrentUser";
 
 const CssTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
@@ -30,10 +31,12 @@ const CssTextField = styled(TextField)({
 });
 
 const Home = () => {
-  const name = "Daniel";
   const filters = ["Recommended", "Popular", "Trending"];
   const [filter, setFilter] = useState(0);
   const { loading, data } = useHotels();
+  const { data: currentUserData } = useCurrentUser();
+  const name = currentUserData?.currentUser?.firstName;
+
   const hotels = data?.hotels || [];
   return (
     <>

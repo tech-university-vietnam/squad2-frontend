@@ -4,6 +4,7 @@ const CURRENT_USER_GQL = gql`
   query {
     currentUser {
       id
+      firstName
     }
   }
 `;

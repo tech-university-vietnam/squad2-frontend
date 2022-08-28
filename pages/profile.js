@@ -25,8 +25,9 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { COOKIES, ThemeColor } from "../src/config/constants";
 import ErrorField from "../src/components/ErrorField";
 import MuiPhoneNumber from "material-ui-phone-number-2";
-import { setCookie } from "cookies-next";
+import { deleteCookie, setCookie } from "cookies-next";
 import { useCreateUser } from "../src/services/useRegister";
+import useCurrentUser from "../src/services/userCurrentUser";
 
 const CssTextField = styled(TextField)({
   // background: "#fafafa",
@@ -69,8 +70,15 @@ const ScrollableStack = styled(Stack)`
 
 const ProfilePage = () => {
   const router = useRouter();
-  const { family_name, given_name, picture, email, access_token } =
-    router.query;
+  const {
+    family_name,
+    given_name,
+    picture,
+    email,
+    access_token,
+    sub: gid,
+  } = router.query;
+
   const {
     getValues,
     register,
@@ -94,18 +102,30 @@ const ProfilePage = () => {
       gender: gender.toLocaleUpperCase(),
       email,
       phone: phone_number,
+      userId: gid,
     };
   })();
 
   const [createUser, { loading, data, error }] = useCreateUser(createUserInput);
-
-  const onSubmit = (data) => {
+  const { data: currentUser, refetch } = useCurrentUser();
+  const onSubmit = async (data) => {
     setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
-    createUser();
+    await createUser();
     if (!error) router.push(routes.home);
   };
 
   useEffect(() => {
+    setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
+    setTimeout(() => {
+      refetch()
+        .then(async () => {
+          await refetch();
+          await router.replace(routes.home);
+        })
+        .catch(() => {
+          deleteCookie(COOKIES.ACCESS_TOKEN);
+        });
+    }, 300);
     reset({
       lastname: family_name,
       firstname: given_name,
