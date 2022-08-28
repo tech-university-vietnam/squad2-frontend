@@ -34,8 +34,7 @@ const Home = () => {
   const filters = ["Recommended", "Popular", "Trending"];
   const [filter, setFilter] = useState(0);
   const { loading, data } = useHotels();
-
-  console.log(loading, data);
+  const hotels = data?.hotels || [];
   return (
     <>
       <Box
@@ -98,16 +97,15 @@ const Home = () => {
         <ChipGroup value={filter} labels={filters} setValue={setFilter} />
 
         <Box pb={8}>
-          {Array.from(Array(10)).map((_, idx) => (
+          {hotels.map((hotel) => (
             <HotelCard
-              name="President Hotel"
-              address="Paris, France"
+              name={hotel.name}
+              address={hotel.address}
               rating={4.6}
               review={1234}
-              price="$26"
-              bookmarked={idx % 2 == 0}
-              image={"https://source.unsplash.com/random/?hotel"}
-              key={idx}
+              price={hotel.price}
+              bookmarked={false}
+              image={hotel?.images?.[0]}
             />
           ))}
         </Box>

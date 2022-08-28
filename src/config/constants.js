@@ -1,4 +1,4 @@
-export const API_URL = "";
+export const API_URL = "http://localhost:8000/graphql/";
 
 export const ThemeColor = {
   primary: "#1AB65C",

@@ -66,7 +66,7 @@ const HotelCard = ({
 
           <Box display="flex" flexDirection="column">
             <Typography variant="h6" color="primary">
-              {price}
+              ${price}
             </Typography>
             <Typography color="gray" align="right" variant="caption">
               / night

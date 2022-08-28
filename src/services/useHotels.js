@@ -1,18 +1,22 @@
 import { gql, useQuery } from "@apollo/client";
 
-const GET_LOCATIONS = gql`
-  query GetLocations {
-    locations {
+const GET_HOTELS = gql`
+  query {
+    hotels {
       id
       name
+      phone
+      price
       description
-      photo
+      address
+      images
+      description
     }
   }
 `;
 
 function useHotels() {
-  return useQuery(GET_LOCATIONS);
+  return useQuery(GET_HOTELS);
 }
 
 export default useHotels;

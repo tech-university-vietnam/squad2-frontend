@@ -1,17 +1,15 @@
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  gql,
   HttpLink,
   ApolloLink,
   concat,
 } from "@apollo/client";
 import { getCookie } from "cookies-next";
-import { COOKIES } from "../config/constants";
+import { API_URL, COOKIES } from "../config/constants";
 
 const httpLink = new HttpLink({
-  uri: "https://flyby-gateway.herokuapp.com/",
+  uri: API_URL,
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
