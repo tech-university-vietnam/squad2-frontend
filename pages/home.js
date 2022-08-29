@@ -1,13 +1,14 @@
 import {
   Avatar,
   Box,
+  CircularProgress,
   IconButton,
   InputAdornment,
   styled,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeColor } from "../src/config/constants";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
@@ -32,12 +33,42 @@ const CssTextField = styled(TextField)({
 
 const Home = () => {
   const filters = ["Recommended", "Popular", "Trending"];
+  const [isTop, setIsTop] = useState(true);
   const [filter, setFilter] = useState(0);
-  const { loading, data } = useHotels();
+  const [page, setPage] = useState(1);
+  // TODO: Handle when limit is small such that component is not overflow (not scrollable)
+  const limit = 6;
+  const orderBy = "";
+  const { loading, data, fetchMore } = useHotels({
+    paging: {
+      limit,
+      page,
+    },
+    orderBy,
+  });
   const { data: currentUserData } = useCurrentUser();
   const name = currentUserData?.currentUser?.firstName;
 
-  const hotels = data?.hotels || [];
+  const hotels = data?.hotels.items || [];
+  const totalPages = data?.hotels.meta.totalPages || 1;
+
+  const handleScroll = (event) => {
+    const _isTop = event.target.scrollTop == 0;
+    const _istBottom =
+      event.target.scrollHeight - event.target.scrollTop ==
+      event.target.clientHeight;
+
+    setIsTop(_isTop);
+
+    if (_istBottom && page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (page > 1) fetchMore({});
+  }, [page, fetchMore]);
+
   return (
     <>
       <Box
@@ -53,7 +84,9 @@ const Home = () => {
           left: 0,
           bgcolor: "white",
           zIndex: 999,
+          boxShadow: isTop ? 0 : 12,
         }}
+        onScroll={handleScroll}
       >
         <Box display="flex">
           <Avatar
@@ -73,7 +106,12 @@ const Home = () => {
         </Box>
       </Box>
 
-      <Box p={2} pt={10}>
+      <Box
+        p={2}
+        pt={10}
+        onScroll={handleScroll}
+        sx={{ overflow: "scroll", height: "100vh" }}
+      >
         <Typography variant="h5" fontWeight={700} mb={2}>
           Hello, {name} 👋!
         </Typography>
@@ -102,6 +140,7 @@ const Home = () => {
         <Box pb={8}>
           {hotels.map((hotel) => (
             <HotelCard
+              key={hotel.id}
               name={hotel.name}
               address={hotel.address}
               rating={4.6}
@@ -109,10 +148,25 @@ const Home = () => {
               price={hotel.price}
               bookmarked={false}
               image={hotel?.images?.[0]}
+              id={hotel.id}
             />
           ))}
         </Box>
       </Box>
+      {loading && (
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 60,
+            right: 0,
+            left: 0,
+            zIndex: 999,
+            textAlign: "center",
+          }}
+        >
+          <CircularProgress color="primary" size={20} />
+        </Box>
+      )}
     </>
   );
 };
