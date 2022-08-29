@@ -40,7 +40,7 @@ const AppLayout = ({ children }) => {
     router.asPath === routes.splash ||
     router.asPath === routes.welcome ||
     router.asPath === routes.onboard ||
-    router.asPath === routes.profile ||
+    router.asPath.startsWith(routes.profile); 
     router.asPath === routes.login;
 
   useEffect(() => {

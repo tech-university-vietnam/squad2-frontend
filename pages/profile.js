@@ -26,7 +26,7 @@ import { COOKIES, ThemeColor } from "../src/config/constants";
 import ErrorField from "../src/components/ErrorField";
 import MuiPhoneNumber from "material-ui-phone-number-2";
 import { deleteCookie, setCookie } from "cookies-next";
-import { useCreateUser } from "../src/services/useRegister";
+import useCreateUser from "../src/services/useRegister";
 import useCurrentUser from "../src/services/userCurrentUser";
 
 const CssTextField = styled(TextField)({

@@ -24,10 +24,11 @@ const HotelCard = ({
   price,
   bookmarked,
   image,
+  id,
   ...rest
 }) => {
   return (
-    <Link style={{ cursor: "pointer" }} href={routes.hotel_detail("1")}>
+    <Link style={{ cursor: "pointer" }} href={routes.hotel_detail(id)}>
       <Card
         sx={{
           display: "flex",
