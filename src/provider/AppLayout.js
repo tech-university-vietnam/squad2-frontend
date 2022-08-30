@@ -40,8 +40,7 @@ const AppLayout = ({ children }) => {
     router.asPath === routes.splash ||
     router.asPath === routes.welcome ||
     router.asPath === routes.onboard ||
-    router.asPath.startsWith(routes.profile); 
-    router.asPath === routes.login;
+    router.asPath.startsWith(routes.profile);
 
   useEffect(() => {
     checkAuth();

@@ -21,7 +21,13 @@ const ChipGroup = ({ value, setValue, labels, ...rest }) => {
         <Chip
           label={label}
           variant={idx === value ? "filled" : "outlined"}
-          onClick={() => setValue(idx)}
+          onClick={() => {
+            // console.log(value.toString(), typeof idx);
+            if (value === idx) {
+              return setValue(undefined);
+            }
+            return setValue(idx);
+          }}
           color="primary"
           sx={{ color: idx === value ? "white" : "primary" }}
         />

@@ -32,14 +32,14 @@ const CssTextField = styled(TextField)({
 });
 
 const Home = () => {
-  const filters = ["Recommended", "Popular", "Trending"];
+  const filters = ["Price"];
   const [isTop, setIsTop] = useState(true);
-  const [filter, setFilter] = useState(0);
+  const [filter, setFilter] = useState(undefined);
   const [page, setPage] = useState(1);
   // TODO: Handle when limit is small such that component is not overflow (not scrollable)
   const limit = 6;
-  const orderBy = "";
-  const { loading, data, fetchMore } = useHotels({
+  const orderBy = filter === 0 ? "price" : "";
+  const { loading, data, fetchMore, refetch } = useHotels({
     paging: {
       limit,
       page,
@@ -68,6 +68,10 @@ const Home = () => {
   useEffect(() => {
     if (page > 1) fetchMore({});
   }, [page, fetchMore]);
+
+  useEffect(() => {
+    refetch();
+  }, [filter]);
 
   return (
     <>
