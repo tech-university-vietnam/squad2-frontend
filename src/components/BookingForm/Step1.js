@@ -1,18 +1,8 @@
-import {
-  Button,
-  Container,
-  FormControl,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Container, FormControl, Grid, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import ErrorField from "../ErrorField";
 import { ThemeColor } from "../../config/constants";
-import { FiChevronLeft } from "react-icons/fi";
-import routes from "../../config/routes";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -72,15 +62,26 @@ const ChangeQuantityGroup = styled.div`
   }
 `;
 
-const Step1 = ({ watch, register, setValue, formState: { errors } }) => {
+const Step1 = ({
+  nextStep,
+  watch,
+  register,
+  setValue,
+  formState: { errors },
+}) => {
   const guests = watch("guests");
+  const check_in = watch("check_in");
+  const check_out = watch("check_out");
   const price = 29;
+
   const increase = () => {
     setValue("guests", guests + 1);
   };
   const decrease = () => {
     setValue("guests", guests - 1);
   };
+
+  const disabled = !check_in || !check_out || guests === 0;
 
   return (
     <>
@@ -148,14 +149,18 @@ const Step1 = ({ watch, register, setValue, formState: { errors } }) => {
           }}
         >
           <Button
+            disabled={disabled}
             style={{
               width: "100%",
-              boxShadow: "2px 3px 8px 6px rgba(26,182,92,0.34)",
+              ...(!disabled
+                ? { boxShadow: "2px 3px 8px 6px rgba(26,182,92,0.34)" }
+                : {}),
               color: "white",
             }}
             size="large"
             variant="contained"
-            type="submit"
+            type="button"
+            onClick={nextStep}
           >
             Continue
           </Button>
