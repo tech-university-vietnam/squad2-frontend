@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Step1 from "../../../src/components/BookingForm/Step1";
 import { useForm } from "react-hook-form";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { FiChevronLeft } from "react-icons/fi";
 import routes from "../../../src/config/routes";
 import styled from "@emotion/styled";
+import Step2 from "../../../src/components/BookingForm/Step2";
+import useCurrentUser from "../../../src/services/userCurrentUser";
 
 const PageTitle = styled(Typography)`
   font-size: 20px;
@@ -12,14 +14,11 @@ const PageTitle = styled(Typography)`
 `;
 
 const BookFormPage = () => {
-  const formProps = useForm({
-    defaultValues: {
-      check_in: null,
-      check_out: null,
-      guests: 0,
-    },
-  });
-  const [step, setStep] = useState(0);
+  const { data: currentUser } = useCurrentUser();
+
+  const formProps = useForm();
+
+  const [step, setStep] = useState(1);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -42,6 +41,17 @@ const BookFormPage = () => {
     }
   }, [step]);
 
+  useEffect(() => {
+    formProps.reset({
+      check_in: null,
+      check_out: null,
+      guests: 0,
+      lastname: currentUser?.currentUser?.lastName,
+      firstname: currentUser?.currentUser?.firstName,
+      email: currentUser?.currentUser?.email,
+    });
+  }, [currentUser]);
+
   return (
     <Container>
       <Stack direction="row" pt={2} alignItems="center" spacing={0}>
@@ -59,12 +69,16 @@ const BookFormPage = () => {
       </Stack>
       <Box
         display="flex"
-        alignItems="center"
+        alignItems="flex-start"
         justifyContent="center"
         height="60vh"
       >
-        <form onSubmit={formProps.handleSubmit(onSubmit)}>
+        <form
+          onSubmit={formProps.handleSubmit(onSubmit)}
+          style={{ width: "100%" }}
+        >
           {step === 0 && <Step1 {...formProps} nextStep={nextStep} />}
+          {step === 1 && <Step2 {...formProps} nextStep={nextStep} />}
         </form>
       </Box>
     </Container>

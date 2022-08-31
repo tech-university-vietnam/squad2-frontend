@@ -5,6 +5,7 @@ import ErrorField from "../ErrorField";
 import { ThemeColor } from "../../config/constants";
 
 const StyledDiv = styled.div`
+  margin-top: 32px;
   display: flex;
   flex-direction: column;
   .total {
@@ -72,6 +73,7 @@ const Step1 = ({
   const guests = watch("guests");
   const check_in = watch("check_in");
   const check_out = watch("check_out");
+  const disabled = !check_in || !check_out || guests === 0;
   const price = 29;
 
   const increase = () => {
@@ -80,8 +82,6 @@ const Step1 = ({
   const decrease = () => {
     setValue("guests", guests - 1);
   };
-
-  const disabled = !check_in || !check_out || guests === 0;
 
   return (
     <>
