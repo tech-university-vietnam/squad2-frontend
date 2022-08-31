@@ -7,6 +7,7 @@ const CURRENT_USER_GQL = gql`
       firstName
       lastName
       email
+      phone
     }
   }
 `;

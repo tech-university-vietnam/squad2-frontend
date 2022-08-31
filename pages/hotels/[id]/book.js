@@ -7,6 +7,7 @@ import routes from "../../../src/config/routes";
 import styled from "@emotion/styled";
 import Step2 from "../../../src/components/BookingForm/Step2";
 import useCurrentUser from "../../../src/services/userCurrentUser";
+import Step3 from "../../../src/components/BookingForm/Step3";
 
 const PageTitle = styled(Typography)`
   font-size: 20px;
@@ -18,7 +19,7 @@ const BookFormPage = () => {
 
   const formProps = useForm();
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -49,6 +50,7 @@ const BookFormPage = () => {
       lastname: currentUser?.currentUser?.lastName,
       firstname: currentUser?.currentUser?.firstName,
       email: currentUser?.currentUser?.email,
+      phone: currentUser?.currentUser?.phone,
     });
   }, [currentUser]);
 
@@ -79,6 +81,7 @@ const BookFormPage = () => {
         >
           {step === 0 && <Step1 {...formProps} nextStep={nextStep} />}
           {step === 1 && <Step2 {...formProps} nextStep={nextStep} />}
+          {step === 2 && <Step3 {...formProps} nextStep={nextStep} />}
         </form>
       </Box>
     </Container>

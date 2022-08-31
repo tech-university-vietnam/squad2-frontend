@@ -97,7 +97,7 @@ const Step2 = ({
     !watch("lastname") ||
     !watch("firstname") ||
     !watch("email") ||
-    !watch("phone_number") ||
+    !watch("phone") ||
     !watch("date_of_birth");
 
   return (
@@ -195,14 +195,14 @@ const Step2 = ({
                 },
               },
             }}
-            {...register("phone_number", {
+            {...register("phone", {
               required: "Please input your phone number",
             })}
             onChange={(value) => {
-              setValue("phone_number", value);
+              setValue("phone", value);
             }}
           />
-          <ErrorField attribute={errors?.phone_number} />
+          <ErrorField attribute={errors?.phone} />
         </FormControl>
       </Stack>
       <Container
