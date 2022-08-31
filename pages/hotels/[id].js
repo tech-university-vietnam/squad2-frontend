@@ -123,81 +123,108 @@ const HotelDetail = () => {
             );
           })}
       </Swiper>
-      <Typography variant="h4">{hotel?.name}</Typography>
 
-      <Box display="flex">
-        <LocationOnIcon color="primary" />
-        <Typography>{hotel?.address}</Typography>
-      </Box>
+      <Box pb={16}>
+        <Box m={2}>
+          <Typography variant="h4" mb={1}>
+            {hotel?.name}
+          </Typography>
+          <Box display="flex">
+            <LocationOnIcon color="primary" />
+            <Typography>{hotel?.address}</Typography>
+          </Box>
+        </Box>
 
-      <Divider />
+        <Divider />
 
-      <Box display="flex" justifyContent="space-between" alignItems="baseline">
-        <Typography variant="h6">Gallery Photos</Typography>
-        <Link style={{ cursor: "pointer" }} href={routes.hotel_gallery(id)}>
-          <Typography color="primary">See All</Typography>
-        </Link>
-      </Box>
-      <Stack
-        direction="row"
-        spacing={1}
-        sx={{
-          maxWidth: "100%",
-          overflow: "auto",
-          msOverflowStyle: "none",
-          scrollbarWidth: "none",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-        }}
-      >
-        {hotel &&
-          hotel.images.map((image) => {
-            return (
-              <Box
-                key={image}
-                component="img"
-                width="160px"
-                height="100px"
-                borderRadius={2}
-                sx={{ objectFit: "cover" }}
-                src={image}
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="baseline"
+          mx={2}
+          mt={2}
+          mb={1}
+        >
+          <Typography variant="h6">Gallery Photos</Typography>
+          <Link style={{ cursor: "pointer" }} href={routes.hotel_gallery(id)}>
+            <Typography color="primary">See All</Typography>
+          </Link>
+        </Box>
+
+        <Stack
+          direction="row"
+          spacing={1}
+          ml={2}
+          sx={{
+            maxWidth: "100%",
+            overflow: "auto",
+            msOverflowStyle: "none",
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
+          {hotel &&
+            hotel.images.map((image) => {
+              return (
+                <Box
+                  key={image}
+                  component="img"
+                  width="160px"
+                  height="100px"
+                  borderRadius={2}
+                  sx={{ objectFit: "cover" }}
+                  src={image}
+                />
+              );
+            })}
+        </Stack>
+
+        <Box m={2}>
+          <Typography variant="h6" mb={1}>
+            Details
+          </Typography>
+          <Box display="flex" justifyContent="space-around">
+            {/* TODO: Intergrate with backend API */}
+            {["hotel", "bedroom", "bathroom", "area"].map((key) => (
+              <IconWithLabel
+                key={key}
+                icon={icons[key].icon}
+                label={icons[key].name}
               />
-            );
-          })}
-      </Stack>
+            ))}
+          </Box>
+        </Box>
 
-      <Typography variant="h6">Details</Typography>
-      <Box display="flex" justifyContent="space-around">
-        {/* TODO: Intergrate with backend API */}
-        {["hotel", "bedroom", "bathroom", "area"].map((key) => (
-          <IconWithLabel
-            key={key}
-            icon={icons[key].icon}
-            label={icons[key].name}
-          />
-        ))}
-      </Box>
+        <Box m={2}>
+          <Typography variant="h6" mb={1}>
+            Description
+          </Typography>
+          <Typography>{hotel?.description}</Typography>
+        </Box>
 
-      <Typography variant="h6">Description</Typography>
-      <Typography>{hotel?.description}</Typography>
-
-      <Typography variant="h6">Facilities</Typography>
-      <Box display="flex" justifyContent="space-around" flexWrap="wrap">
-        {/* TODO: Intergrate with backend API */}
-        {Object.keys(icons)
-          .filter(
-            (key) => !["hotel", "bedroom", "bathroom", "area"].includes(key)
-          )
-          .map((key) => (
-            <IconWithLabel
-              key={key}
-              icon={icons[key].icon}
-              label={icons[key].name}
-              m={1}
-              // minWidth={30}
-            />
-          ))}
+        <Box m={2}>
+          <Typography variant="h6" mb={1}>
+            Facilities
+          </Typography>
+          <Box display="flex" justifyContent="space-around" flexWrap="wrap">
+            {/* TODO: Intergrate with backend API */}
+            {Object.keys(icons)
+              .filter(
+                (key) => !["hotel", "bedroom", "bathroom", "area"].includes(key)
+              )
+              .map((key) => (
+                <IconWithLabel
+                  key={key}
+                  icon={icons[key].icon}
+                  label={icons[key].name}
+                  m={1}
+                  // minWidth={30}
+                />
+              ))}
+          </Box>
+        </Box>
       </Box>
       {/* <Box
         display="flex"
@@ -219,11 +246,15 @@ const HotelDetail = () => {
           left: 0,
           right: 0,
           zIndex: 9999,
-          alignContent: "center",
+          alignItems: "center",
           bgcolor: "white",
+          py: 3,
+          borderRadius: 6,
+          borderTop: 1,
+          borderColor: "#f0f0f0",
         }}
       >
-        <Box display="flex" alignContent="baseline" mr={2}>
+        <Box display="flex" alignItems="baseline" mr={2}>
           <Typography color="primary" variant="h5">
             ${hotel?.price || 0}
           </Typography>
