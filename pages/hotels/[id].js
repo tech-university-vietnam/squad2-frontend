@@ -1,5 +1,247 @@
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useRouter } from "next/router";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, A11y } from "swiper";
+import useHotel from "../../src/services/useHotel";
+import styles from "../../styles/Onboard.module.css";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Link from "next/link";
+import routes from "../../src/config/routes";
+import IconWithLabel from "../../src/components/IconWithLabel";
+import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
+import HotelIcon from "@mui/icons-material/Hotel";
+import BathtubIcon from "@mui/icons-material/Bathtub";
+// import WidthFullIcon from "@mui/icons-material/WidthFull";
+import SquareIcon from "@mui/icons-material/Square";
+import PoolIcon from "@mui/icons-material/Pool";
+import WifiIcon from "@mui/icons-material/Wifi";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import LocalParkingIcon from "@mui/icons-material/LocalParking";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import ElevatorIcon from "@mui/icons-material/Elevator";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore";
+import { ThemeColor } from "../../src/config/constants";
+
+const images = [
+  "https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6",
+  "https://images.unsplash.com/photo-1506929562872-bb421503ef21",
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+];
+
+const icons = {
+  hotel: {
+    icon: <MapsHomeWorkIcon color="primary" />,
+    name: "Hotels",
+  },
+  bedroom: {
+    icon: <HotelIcon color="primary" />,
+    name: "Bedroom",
+  },
+  bathroom: {
+    icon: <BathtubIcon color="primary" />,
+    name: "Bathroom",
+  },
+  area: {
+    icon: <SquareIcon color="primary" />,
+    name: "sqft",
+  },
+  pool: {
+    icon: <PoolIcon color="primary" />,
+    name: "Swimming Pool",
+  },
+  wifi: {
+    icon: <WifiIcon color="primary" />,
+    name: "Wifi",
+  },
+  restaurant: {
+    icon: <RestaurantIcon color="primary" />,
+    name: "Restaurant",
+  },
+  parking: {
+    icon: <LocalParkingIcon color="primary" />,
+    name: "Parking",
+  },
+  meeting: {
+    icon: <MeetingRoomIcon color="primary" />,
+    name: "Meeting Room",
+  },
+  elevator: {
+    icon: <ElevatorIcon color="primary" />,
+    name: "Elevator",
+  },
+  fitness: {
+    icon: <FitnessCenterIcon color="primary" />,
+    name: "Fitness Center",
+  },
+  open: {
+    icon: <LocalConvenienceStoreIcon color="primary" />,
+    name: "24-hours-open",
+  },
+};
+
 const HotelDetail = () => {
-  return <div />;
+  const router = useRouter();
+  const { id } = router.query;
+  const { data } = useHotel(+id);
+  const hotel = data?.hotel;
+  console.log(hotel);
+  return (
+    <>
+      <Swiper
+        modules={[Pagination, A11y]}
+        spaceBetween={50}
+        slidesPerView={1}
+        pagination={{
+          clickable: true,
+          bulletActiveClass: styles.squadBulletActive,
+        }}
+        // onSwiper={(_swiper) => {
+        //   setSwiper(_swiper);
+        // }}
+        autoHeight
+      >
+        {hotel &&
+          hotel.images.map((image) => {
+            return (
+              <SwiperSlide key={image}>
+                <Box
+                  component="img"
+                  width="100%"
+                  height="300px"
+                  sx={{ objectFit: "cover" }}
+                  src={image}
+                />
+              </SwiperSlide>
+            );
+          })}
+      </Swiper>
+      <Typography variant="h4">{hotel?.name}</Typography>
+
+      <Box display="flex">
+        <LocationOnIcon color="primary" />
+        <Typography>{hotel?.address}</Typography>
+      </Box>
+
+      <Divider />
+
+      <Box display="flex" justifyContent="space-between" alignItems="baseline">
+        <Typography variant="h6">Gallery Photos</Typography>
+        <Link style={{ cursor: "pointer" }} href={routes.hotel_gallery(id)}>
+          <Typography color="primary">See All</Typography>
+        </Link>
+      </Box>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          maxWidth: "100%",
+          overflow: "auto",
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+        }}
+      >
+        {hotel &&
+          hotel.images.map((image) => {
+            return (
+              <Box
+                key={image}
+                component="img"
+                width="160px"
+                height="100px"
+                borderRadius={2}
+                sx={{ objectFit: "cover" }}
+                src={image}
+              />
+            );
+          })}
+      </Stack>
+
+      <Typography variant="h6">Details</Typography>
+      <Box display="flex" justifyContent="space-around">
+        {/* TODO: Intergrate with backend API */}
+        {["hotel", "bedroom", "bathroom", "area"].map((key) => (
+          <IconWithLabel
+            key={key}
+            icon={icons[key].icon}
+            label={icons[key].name}
+          />
+        ))}
+      </Box>
+
+      <Typography variant="h6">Description</Typography>
+      <Typography>{hotel?.description}</Typography>
+
+      <Typography variant="h6">Facilities</Typography>
+      <Box display="flex" justifyContent="space-around" flexWrap="wrap">
+        {/* TODO: Intergrate with backend API */}
+        {Object.keys(icons)
+          .filter(
+            (key) => !["hotel", "bedroom", "bathroom", "area"].includes(key)
+          )
+          .map((key) => (
+            <IconWithLabel
+              key={key}
+              icon={icons[key].icon}
+              label={icons[key].name}
+              m={1}
+              // minWidth={30}
+            />
+          ))}
+      </Box>
+      {/* <Box
+        display="flex"
+        position="fixed"
+        bottom={0}
+        left={0}
+        right={0}
+        zIndex={9999}
+        alignContent="center"
+        bgcolor="white"
+      ></Box> */}
+
+      <Container
+        maxWidth="md"
+        sx={{
+          display: "flex",
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          alignContent: "center",
+          bgcolor: "white",
+        }}
+      >
+        <Box display="flex" alignContent="baseline" mr={2}>
+          <Typography color="primary" variant="h5">
+            ${hotel?.price || 0}
+          </Typography>
+          <Typography>/night</Typography>
+        </Box>
+        <Link href={routes.hotel_book(id)} style={{ flex: 1 }}>
+          <Button
+            sx={{ color: "white" }}
+            size="large"
+            variant="contained"
+            fullWidth
+          >
+            Book Now!
+          </Button>
+        </Link>
+      </Container>
+    </>
+  );
 };
 
 export default HotelDetail;
