@@ -74,9 +74,9 @@ const Step1 = ({
   const guests = watch("guests");
   const checkIn = watch("checkIn");
   const checkOut = watch("checkOut");
+  const price = watch("price");
   const days = differenceInDays(checkOut, checkIn);
   const disabled = !checkIn || !checkOut || guests === 0;
-  const price = 29;
   const total = price && days && guests ? price * guests * days : 0;
 
   const increase = () => {

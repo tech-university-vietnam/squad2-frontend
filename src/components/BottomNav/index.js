@@ -12,7 +12,7 @@ const BottomNav = () => {
   const navList = [
     { label: "Home", route: routes.home, icon: <HomeIcon /> },
     { label: "Search", route: routes.search, icon: <SearchIcon /> },
-    { label: "Booking", route: routes.booking, icon: <ArticleIcon /> },
+    { label: "Booking", route: routes.bookings, icon: <ArticleIcon /> },
     { label: "Profile", route: routes.account, icon: <PersonIcon /> },
   ];
   const selectedIndex = navList.findIndex((nav) => nav.route === router.asPath);

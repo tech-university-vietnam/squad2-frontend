@@ -11,6 +11,7 @@ import Step3 from "../../../src/components/BookingForm/Step3";
 import useCreateBooking from "../../../src/services/useCreateBooking";
 import { omit } from "lodash";
 import { useRouter } from "next/router";
+import useHotel from "../../../src/services/useHotel";
 
 const PageTitle = styled(Typography)`
   font-size: 20px;
@@ -22,7 +23,7 @@ const BookFormPage = () => {
   const { id: hotelId } = router.query;
   const { data: currentUser } = useCurrentUser();
   const [createBooking, { loading, data, error }] = useCreateBooking();
-
+  const { data: hotelData } = useHotel(+hotelId);
   const formProps = useForm();
 
   const [step, setStep] = useState(0);
@@ -42,6 +43,7 @@ const BookFormPage = () => {
             "dob",
             "pronoun",
             "payment_method",
+            "price",
           ]),
         },
       },
@@ -73,8 +75,9 @@ const BookFormPage = () => {
       firstname: currentUser?.currentUser?.firstName,
       email: currentUser?.currentUser?.email,
       phone: currentUser?.currentUser?.phone,
+      price: hotelData?.hotel?.price || 0,
     });
-  }, [currentUser]);
+  }, [currentUser, hotelData]);
 
   return (
     <Container>

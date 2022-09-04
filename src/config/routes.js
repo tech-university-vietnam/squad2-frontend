@@ -1,7 +1,8 @@
 const routes = {
   home: "/home",
   search: "/search",
-  booking: "/booking",
+  bookings: "/bookings",
+  booking_detail: (id) => `/bookings/${id}`,
   onboard: "/onboard",
   login: "/login",
   splash: "/splash",
