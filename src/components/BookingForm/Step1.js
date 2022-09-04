@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import ErrorField from "../ErrorField";
 import { ThemeColor } from "../../config/constants";
+import { differenceInDays } from "date-fns";
 
 const StyledDiv = styled.div`
   margin-top: 32px;
@@ -71,10 +72,12 @@ const Step1 = ({
   formState: { errors },
 }) => {
   const guests = watch("guests");
-  const check_in = watch("check_in");
-  const check_out = watch("check_out");
-  const disabled = !check_in || !check_out || guests === 0;
+  const checkIn = watch("checkIn");
+  const checkOut = watch("checkOut");
+  const days = differenceInDays(checkOut, checkIn);
+  const disabled = !checkIn || !checkOut || guests === 0;
   const price = 29;
+  const total = price && days && guests ? price * guests * days : 0;
 
   const increase = () => {
     setValue("guests", guests + 1);
@@ -92,13 +95,13 @@ const Step1 = ({
             <FormControl variant="filled">
               <DesktopDatePicker
                 inputFormat="MM/dd/yyyy"
-                value={watch("check_in")}
+                value={watch("checkIn")}
                 renderInput={(params) => <CssTextField fullWidth {...params} />}
-                {...register("check_in", {
+                {...register("checkIn", {
                   required: "Please input",
                 })}
                 onChange={(value) => {
-                  setValue("check_in", value);
+                  setValue("checkIn", value);
                 }}
               />
               <ErrorField attribute={errors?.check_in} />
@@ -109,13 +112,14 @@ const Step1 = ({
             <FormControl variant="filled">
               <DesktopDatePicker
                 inputFormat="MM/dd/yyyy"
-                value={watch("check_out")}
+                minDate={watch("checkIn")}
+                value={watch("checkOut")}
                 renderInput={(params) => <CssTextField fullWidth {...params} />}
-                {...register("check_out", {
+                {...register("checkOut", {
                   required: "Please input",
                 })}
                 onChange={(value) => {
-                  setValue("check_out", value);
+                  setValue("checkOut", value);
                 }}
               />
               <ErrorField attribute={errors?.check_in} />
@@ -136,7 +140,7 @@ const Step1 = ({
             +
           </div>
         </ChangeQuantityGroup>
-        <b className="total">Total: ${price * guests}</b>
+        <b className="total">Total: ${total}</b>
         <Container
           maxWidth="md"
           sx={{

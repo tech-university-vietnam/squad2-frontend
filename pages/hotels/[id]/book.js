@@ -8,6 +8,9 @@ import styled from "@emotion/styled";
 import Step2 from "../../../src/components/BookingForm/Step2";
 import useCurrentUser from "../../../src/services/userCurrentUser";
 import Step3 from "../../../src/components/BookingForm/Step3";
+import useCreateBooking from "../../../src/services/useCreateBooking";
+import { omit } from "lodash";
+import { useRouter } from "next/router";
 
 const PageTitle = styled(Typography)`
   font-size: 20px;
@@ -15,19 +18,38 @@ const PageTitle = styled(Typography)`
 `;
 
 const BookFormPage = () => {
+  const router = useRouter();
+  const { id: hotelId } = router.query;
   const { data: currentUser } = useCurrentUser();
+  const [createBooking, { loading, data, error }] = useCreateBooking();
 
   const formProps = useForm();
 
   const [step, setStep] = useState(0);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    await createBooking({
+      variables: {
+        createBookingInput: {
+          hotelId: parseInt(hotelId),
+          userId: parseInt(currentUser?.currentUser?.id),
+          ...omit(data, [
+            "guests",
+            "lastname",
+            "firstname",
+            "email",
+            "phone",
+            "dob",
+            "pronoun",
+            "payment_method",
+          ]),
+        },
+      },
+    });
   };
 
   const nextStep = () => {
     setStep(step + 1);
-    console.log(formProps.getValues());
   };
 
   const pageTitle = useMemo(() => {
@@ -44,8 +66,8 @@ const BookFormPage = () => {
 
   useEffect(() => {
     formProps.reset({
-      check_in: null,
-      check_out: null,
+      checkIn: null,
+      checkOut: null,
       guests: 0,
       lastname: currentUser?.currentUser?.lastName,
       firstname: currentUser?.currentUser?.firstName,

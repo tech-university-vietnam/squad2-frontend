@@ -98,7 +98,7 @@ const Step2 = ({
     !watch("firstname") ||
     !watch("email") ||
     !watch("phone") ||
-    !watch("date_of_birth");
+    !watch("dob");
 
   return (
     <div>
@@ -154,16 +154,16 @@ const Step2 = ({
         <FormControl variant="filled">
           <DesktopDatePicker
             inputFormat="MM/dd/yyyy"
-            value={watch("date_of_birth")}
+            value={watch("dob")}
             renderInput={(params) => <CssTextField fullWidth {...params} />}
-            {...register("date_of_birth", {
+            {...register("dob", {
               required: "Please input your date of birth",
             })}
             onChange={(value) => {
-              setValue("date_of_birth", value);
+              setValue("dob", value);
             }}
           />
-          <ErrorField attribute={errors?.date_of_birth} />
+          <ErrorField attribute={errors?.dob} />
         </FormControl>
         <FormControl variant="filled">
           <CssTextField
@@ -201,6 +201,7 @@ const Step2 = ({
             onChange={(value) => {
               setValue("phone", value);
             }}
+            value={watch("phone")}
           />
           <ErrorField attribute={errors?.phone} />
         </FormControl>
