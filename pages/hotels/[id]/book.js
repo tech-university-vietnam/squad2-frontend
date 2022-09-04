@@ -29,7 +29,7 @@ const BookFormPage = () => {
   const [step, setStep] = useState(0);
 
   const onSubmit = async (data) => {
-    await createBooking({
+    const booking = await createBooking({
       variables: {
         createBookingInput: {
           hotelId: parseInt(hotelId),
@@ -48,6 +48,7 @@ const BookFormPage = () => {
         },
       },
     });
+    router.replace(routes.booking_detail(booking.data.createBooking.id));
   };
 
   const nextStep = () => {

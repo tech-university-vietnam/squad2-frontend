@@ -94,6 +94,7 @@ const Step1 = ({
             <b>Check-in</b>
             <FormControl variant="filled">
               <DesktopDatePicker
+                minDate={new Date()}
                 inputFormat="MM/dd/yyyy"
                 value={watch("checkIn")}
                 renderInput={(params) => <CssTextField fullWidth {...params} />}

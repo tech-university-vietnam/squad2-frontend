@@ -9,12 +9,13 @@ const BookingPage = () => {
     <div>
       {bookings.map((booking) => {
         return (
-          <Link
-            key={`booking_${booking.id}`}
-            href={routes.booking_detail(booking.id)}
-          >
-            {booking.hotel.name}
-          </Link>
+          <div key={`booking_${booking.id}`}>
+            <Link href={routes.booking_detail(booking.id)}>
+              <a>
+                {booking.id} - {booking.hotel.name}
+              </a>
+            </Link>
+          </div>
         );
       })}
     </div>
