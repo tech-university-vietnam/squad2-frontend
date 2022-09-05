@@ -94,7 +94,7 @@ const ProfilePage = () => {
   });
 
   const createUserInput = (() => {
-    const { lastname, firstname, gender, email, phone_number, date_of_birth } =
+    const { lastname, firstname, gender, email, phone_number, dob } =
       getValues();
     return {
       firstName: firstname,
@@ -227,18 +227,18 @@ const ProfilePage = () => {
               <FormControl variant="filled">
                 <DesktopDatePicker
                   inputFormat="MM/dd/yyyy"
-                  value={watch("date_of_birth")}
+                  value={watch("dob")}
                   renderInput={(params) => (
                     <CssTextField fullWidth {...params} />
                   )}
-                  {...register("date_of_birth", {
+                  {...register("dob", {
                     required: "Please input your date of birth",
                   })}
                   onChange={(value) => {
-                    setValue("date_of_birth", value);
+                    setValue("dob", value);
                   }}
                 />
-                <ErrorField attribute={errors?.date_of_birth} />
+                <ErrorField attribute={errors?.dob} />
               </FormControl>
               <FormControl variant="filled">
                 <StyledMuiPhoneNumber

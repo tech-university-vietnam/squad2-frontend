@@ -5,6 +5,10 @@ const CURRENT_USER_GQL = gql`
     currentUser {
       id
       firstName
+      lastName
+      email
+      phone
+      dob
     }
   }
 `;
