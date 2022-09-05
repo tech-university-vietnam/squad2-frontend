@@ -6,6 +6,7 @@ const GET_BOOKING = gql`
       id
       checkIn
       checkOut
+      guests
       hotel {
         id
         name
@@ -15,6 +16,9 @@ const GET_BOOKING = gql`
       }
       user {
         id
+        lastName
+        firstName
+        phone
       }
       createdAt
       totalPrice

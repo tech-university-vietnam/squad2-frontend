@@ -35,7 +35,6 @@ const BookFormPage = () => {
           hotelId: parseInt(hotelId),
           userId: parseInt(currentUser?.currentUser?.id),
           ...omit(data, [
-            "guests",
             "lastname",
             "firstname",
             "email",

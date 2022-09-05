@@ -6,6 +6,7 @@ const GET_BOOKINGS = gql`
       id
       checkIn
       checkOut
+
       hotel {
         name
         address
