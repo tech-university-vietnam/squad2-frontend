@@ -62,7 +62,7 @@ const BookingCard = ({ booking, ...rest }) => {
           size="small"
           variant="contained"
         >
-          View Tiket
+          View Ticket
         </Button>
       </Link>
     </Card>
