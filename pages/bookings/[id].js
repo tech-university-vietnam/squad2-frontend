@@ -106,7 +106,7 @@ const BookingDetail = () => {
                     <div className="text-left">
                       {booking?.checkIn &&
                         format(
-                          new Date(parseInt(booking?.checkIn) / 1000),
+                          new Date(parseInt(booking?.checkIn)),
                           "LLL dd, yyyy"
                         )}
                     </div>
@@ -118,7 +118,7 @@ const BookingDetail = () => {
                     <div className="text-left">
                       {booking?.checkOut &&
                         format(
-                          new Date(parseInt(booking?.checkOut) / 1000),
+                          new Date(parseInt(booking?.checkOut)),
                           "LLL dd, yyyy"
                         )}
                     </div>
