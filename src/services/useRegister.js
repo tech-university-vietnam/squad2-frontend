@@ -14,12 +14,8 @@ const CREATE_USER_MUTATION = gql`
   }
 `;
 
-function useCreateUser(createUserInput) {
-  return useMutation(CREATE_USER_MUTATION, {
-    variables: {
-      createUserInput,
-    },
-  });
+function useCreateUser() {
+  return useMutation(CREATE_USER_MUTATION);
 }
 
 export default useCreateUser;

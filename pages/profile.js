@@ -110,7 +110,19 @@ const ProfilePage = () => {
   const { data: currentUser, refetch } = useCurrentUser();
   const onSubmit = async (data) => {
     setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
-    await createUser();
+    const { lastname, firstname, gender, email, phone_number, dob } = data;
+    await createUser({
+      variables: {
+        createUserInput: {
+          firstName: firstname,
+          lastName: lastname,
+          gender: gender.toLocaleUpperCase(),
+          email,
+          phone: phone_number,
+          userId: gid,
+        },
+      },
+    });
     if (!error) router.push(routes.home);
   };
 
