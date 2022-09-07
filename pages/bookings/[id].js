@@ -57,6 +57,7 @@ const BookingDetail = () => {
   const booking = data?.booking;
   const hotel = booking?.hotel;
   const user = booking?.user;
+  const totalPrice = booking?.totalPrice;
   console.log(user);
   const checkIn = booking?.checkIn
     ? format(new Date(parseInt(booking?.checkIn)), "LLL dd, yyyy")
@@ -122,16 +123,17 @@ const BookingDetail = () => {
                     <div className="text-left">{checkOut}</div>
                   </div>
                 </Grid>
-                <Grid item xs={6}>
-                  <div className="w-100">
-                    <div className="group-title">Hotel</div>
-                    <div className="text-left">{hotel?.name}</div>
-                  </div>
-                </Grid>
+
                 <Grid item xs={6}>
                   <div className="w-100">
                     <div className="group-title">Room</div>
                     <div className="text-left">{booking?.guests}</div>
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div className="w-100">
+                    <div className="group-title">Price</div>
+                    <div className="text-left">${totalPrice}</div>
                   </div>
                 </Grid>
               </Grid>
