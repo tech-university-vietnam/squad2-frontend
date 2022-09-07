@@ -19,17 +19,7 @@ import ChipGroup from "../src/components/ChipGroup";
 import withAuth from "../src/hooks/withAuth";
 import useHotels from "../src/services/useHotels";
 import useCurrentUser from "../src/services/userCurrentUser";
-
-const CssTextField = styled(TextField)({
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderWidth: 0,
-    },
-    "&.Mui-focused fieldset": {
-      borderRadius: 12,
-    },
-  },
-});
+import SearchBar from "../src/components/SearchBar";
 
 const Home = () => {
   const filters = ["Price"];
@@ -142,25 +132,7 @@ const Home = () => {
           Hello, {name} 👋!
         </Typography>
 
-        <CssTextField
-          fullWidth
-          id="email"
-          placeholder="Email"
-          type="email"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end" sx={{ color: ThemeColor.primary }}>
-                <FilterListIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-
+        <SearchBar />
         <ChipGroup value={filter} labels={filters} setValue={setFilter} />
 
         <Box pb={8}>
