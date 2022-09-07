@@ -25,6 +25,8 @@ const Home = () => {
   const filters = ["Price"];
   const [isTop, setIsTop] = useState(true);
   const [filter, setFilter] = useState(undefined);
+  const [filterBy, setFilterBy] = React.useState(undefined);
+
   const [page, setPage] = useState(1);
   const [hotels, setHotels] = useState([]);
   // TODO: Handle when limit is small such that component is not overflow (not scrollable)
@@ -46,6 +48,7 @@ const Home = () => {
           page: page + 1,
         },
         orderBy,
+        filterBy,
       },
     });
     setHotels([...hotels, data?.data?.hotels?.items || []].flat());
@@ -70,6 +73,20 @@ const Home = () => {
   }, [filter]);
 
   useEffect(() => {
+    setPage(0);
+    refetch({
+      listHotelsInput: {
+        paging: {
+          limit,
+          page,
+        },
+        orderBy,
+        filterBy,
+      },
+    }).then((data) => setHotels(data?.data?.hotels?.items || []));
+  }, [filterBy]);
+
+  useEffect(() => {
     refetch({
       listHotelsInput: {
         paging: {
@@ -77,6 +94,7 @@ const Home = () => {
           page: 0,
         },
         orderBy,
+        filterBy,
       },
     }).then((data) => {
       setHotels(data?.data?.hotels?.items || []);
@@ -132,7 +150,7 @@ const Home = () => {
           Hello, {name} 👋!
         </Typography>
 
-        <SearchBar />
+        <SearchBar text={filterBy} setText={setFilterBy} />
         <ChipGroup value={filter} labels={filters} setValue={setFilter} />
 
         <Box pb={8}>

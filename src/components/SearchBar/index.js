@@ -15,13 +15,7 @@ const CssTextField = styled(TextField)({
     },
   },
 });
-const SearchBar = () => {
-  const [text, setText] = React.useState(undefined);
-
-  const changeText = debounce((text) => {
-    setText(text);
-  }, 500);
-
+const SearchBar = ({ text, setText }) => {
   return (
     <CssTextField
       fullWidth
@@ -29,7 +23,7 @@ const SearchBar = () => {
       value={text}
       type="text"
       onChange={(e) => {
-        changeText(e.target.value);
+        setText(e.target.value);
       }}
       InputProps={{
         startAdornment: (
