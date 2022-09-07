@@ -129,7 +129,7 @@ const Step1 = ({
         </Grid>
         <Grid container spacing={2} marginTop={0.5}>
           <Grid item xs={6}>
-            <b>Guests</b>
+            <b>Rooms</b>
           </Grid>
         </Grid>
         <ChangeQuantityGroup>

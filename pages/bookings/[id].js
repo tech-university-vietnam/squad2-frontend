@@ -132,7 +132,7 @@ const BookingDetail = () => {
                 </Grid>
                 <Grid item xs={6}>
                   <div className="w-100">
-                    <div className="group-title">Guest</div>
+                    <div className="group-title">Room</div>
                     <div className="text-left">{booking?.guests}</div>
                   </div>
                 </Grid>
