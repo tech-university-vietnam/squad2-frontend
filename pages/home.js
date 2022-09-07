@@ -3,17 +3,12 @@ import {
   Box,
   CircularProgress,
   IconButton,
-  InputAdornment,
-  styled,
-  TextField,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ThemeColor } from "../src/config/constants";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import SearchIcon from "@mui/icons-material/Search";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import HotelCard from "../src/components/HotelCard";
 import ChipGroup from "../src/components/ChipGroup";
 import withAuth from "../src/hooks/withAuth";
