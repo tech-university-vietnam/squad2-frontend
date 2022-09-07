@@ -83,6 +83,9 @@ const Step1 = ({
     setValue("guests", guests + 1);
   };
   const decrease = () => {
+    if (guests === 0) {
+      return;
+    }
     setValue("guests", guests - 1);
   };
 

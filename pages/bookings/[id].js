@@ -57,7 +57,17 @@ const BookingDetail = () => {
   const booking = data?.booking;
   const hotel = booking?.hotel;
   const user = booking?.user;
-  console.log(booking);
+  console.log(user);
+  const checkIn = booking?.checkIn
+    ? format(new Date(parseInt(booking?.checkIn)), "LLL dd, yyyy")
+    : undefined;
+  const checkOut = booking?.checkIn
+    ? format(new Date(parseInt(booking?.checkOut)), "LLL dd, yyyy")
+    : undefined;
+
+  const QRCodeContent = `${user?.firstName}_${user?.lastName}_${
+    user?.phone || "NO_PHONE"
+  }_${hotel?.name}_${checkIn}_${checkOut}_${booking?.guests}`;
 
   return (
     <Container>
@@ -75,7 +85,7 @@ const BookingDetail = () => {
           <Card>
             <div className="hotel-name">{hotel?.name}</div>
             <div className="qr">
-              <QRCode value={JSON.stringify(booking || "{}")} />
+              <QRCode value={QRCodeContent} />
             </div>
             <div>
               <Grid
@@ -103,25 +113,13 @@ const BookingDetail = () => {
                 <Grid item xs={6}>
                   <div className="w-100">
                     <div className="group-title">Check in</div>
-                    <div className="text-left">
-                      {booking?.checkIn &&
-                        format(
-                          new Date(parseInt(booking?.checkIn)),
-                          "LLL dd, yyyy"
-                        )}
-                    </div>
+                    <div className="text-left">{checkIn}</div>
                   </div>
                 </Grid>
                 <Grid item xs={6}>
                   <div className="w-100">
                     <div className="group-title">Check out</div>
-                    <div className="text-left">
-                      {booking?.checkOut &&
-                        format(
-                          new Date(parseInt(booking?.checkOut)),
-                          "LLL dd, yyyy"
-                        )}
-                    </div>
+                    <div className="text-left">{checkOut}</div>
                   </div>
                 </Grid>
                 <Grid item xs={6}>
