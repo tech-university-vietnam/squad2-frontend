@@ -18,12 +18,8 @@ const GET_HOTELS = gql`
   }
 `;
 
-function useHotels(listHotelsInput) {
-  return useQuery(GET_HOTELS, {
-    variables: {
-      listHotelsInput,
-    },
-  });
+function useHotels() {
+  return useQuery(GET_HOTELS);
 }
 
 export default useHotels;

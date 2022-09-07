@@ -36,21 +36,30 @@ const Home = () => {
   const [isTop, setIsTop] = useState(true);
   const [filter, setFilter] = useState(undefined);
   const [page, setPage] = useState(1);
+  const [hotels, setHotels] = useState([]);
   // TODO: Handle when limit is small such that component is not overflow (not scrollable)
   const limit = 6;
   const orderBy = filter === 0 ? "price" : "";
-  const { loading, data, fetchMore, refetch } = useHotels({
-    paging: {
-      limit,
-      page,
-    },
-    orderBy,
-  });
+  const { loading, data, fetchMore, refetch } = useHotels();
   const { data: currentUserData } = useCurrentUser();
   const name = currentUserData?.currentUser?.firstName;
 
-  const hotels = data?.hotels.items || [];
+  // const hotels = data?.hotels.items || [];
   const totalPages = data?.hotels.meta.totalPages || 1;
+
+  const loadMore = async () => {
+    setPage(page + 1);
+    const data = await refetch({
+      listHotelsInput: {
+        paging: {
+          limit,
+          page: page + 1,
+        },
+        orderBy,
+      },
+    });
+    setHotels([...hotels, data?.data?.hotels?.items || []].flat());
+  };
 
   const handleScroll = (event) => {
     const _isTop = event.target.scrollTop == 0;
@@ -61,16 +70,29 @@ const Home = () => {
     setIsTop(_isTop);
 
     if (_istBottom && page < totalPages) {
-      setPage(page + 1);
+      loadMore();
     }
   };
 
   useEffect(() => {
-    if (page > 1) fetchMore({});
-  }, [page, fetchMore]);
+    setHotels([]);
+    setPage(0);
+  }, [filter]);
 
   useEffect(() => {
-    refetch();
+    refetch({
+      listHotelsInput: {
+        paging: {
+          limit,
+          page: 0,
+        },
+        orderBy,
+      },
+    }).then((data) => {
+      setHotels(data?.data?.hotels?.items || []);
+    });
+    // setPage(1);
+    // window.scrollTo(0, 0);
   }, [filter]);
 
   return (
