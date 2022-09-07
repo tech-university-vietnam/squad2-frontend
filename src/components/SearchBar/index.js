@@ -37,11 +37,11 @@ const SearchBar = () => {
             <SearchIcon />
           </InputAdornment>
         ),
-        endAdornment: (
-          <InputAdornment position="end" sx={{ color: ThemeColor.primary }}>
-            <FilterListIcon />
-          </InputAdornment>
-        ),
+        // endAdornment: (
+        //   <InputAdornment position="end" sx={{ color: ThemeColor.primary }}>
+        //     <FilterListIcon />
+        //   </InputAdornment>
+        // ),
       }}
     />
   );
