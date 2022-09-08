@@ -13,6 +13,10 @@ const GET_HOTELS = gql`
         price
         address
         images
+        reviews {
+          id
+          point
+        }
       }
     }
   }

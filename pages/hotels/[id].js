@@ -34,6 +34,8 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { ThemeColor } from "../../src/config/constants";
 import { useState } from "react";
+import ReviewCard from "../../src/components/ReviewCard";
+import { slice } from "lodash";
 
 const icons = {
   hotel: {
@@ -91,6 +93,7 @@ const HotelDetail = () => {
   const { id } = router.query;
   const { data } = useHotel(+id);
   const hotel = data?.hotel;
+  const reviews = hotel?.reviews;
   const [isTop, setIsTop] = useState(true);
 
   const handleScroll = (event) => {
@@ -215,15 +218,15 @@ const HotelDetail = () => {
             {hotel &&
               hotel.images.map((image) => {
                 return (
-                  <Box
-                    key={image}
-                    component="img"
-                    width="160px"
-                    height="100px"
-                    borderRadius={2}
-                    sx={{ objectFit: "cover" }}
-                    src={image}
-                  />
+                  <SwiperSlide key={image}>
+                    <Box
+                      component="img"
+                      width="100%"
+                      height="300px"
+                      sx={{ objectFit: "cover" }}
+                      src={image}
+                    />
+                  </SwiperSlide>
                 );
               })}
           </Stack>
@@ -275,18 +278,37 @@ const HotelDetail = () => {
                 ))}
             </Box>
           </Box>
+
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="baseline"
+            mx={2}
+            mt={2}
+            mb={1}
+          >
+            <Typography variant="h6">Reviews</Typography>
+            <Link style={{ cursor: "pointer" }} href={routes.hotel_reviews(id)}>
+              <a>
+                <Typography color="primary">See All</Typography>
+              </a>
+            </Link>
+          </Box>
+          <Box m={2}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-around"
+              flexWrap="wrap"
+            >
+              {reviews &&
+                slice(reviews, 0, 3).map((review) => {
+                  return <ReviewCard key={`review_${review.id}`} {...review} />;
+                })}
+            </Box>
+          </Box>
         </Box>
       </Box>
-      {/* <Box
-        display="flex"
-        position="fixed"
-        bottom={0}
-        left={0}
-        right={0}
-        zIndex={9999}
-        alignContent="center"
-        bgcolor="white"
-      ></Box> */}
 
       <Container
         maxWidth="md"

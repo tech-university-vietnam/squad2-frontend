@@ -15,6 +15,7 @@ import withAuth from "../src/hooks/withAuth";
 import useHotels from "../src/services/useHotels";
 import useCurrentUser from "../src/services/userCurrentUser";
 import SearchBar from "../src/components/SearchBar";
+import { mean, meanBy } from "lodash";
 
 const Home = () => {
   const filters = ["Price"];
@@ -149,19 +150,26 @@ const Home = () => {
         <ChipGroup value={filter} labels={filters} setValue={setFilter} />
 
         <Box pb={8}>
-          {hotels.map((hotel) => (
-            <HotelCard
-              key={hotel.id}
-              name={hotel.name}
-              address={hotel.address}
-              rating={4.6}
-              review={1234}
-              price={hotel.price}
-              bookmarked={false}
-              image={hotel?.images?.[0]}
-              id={hotel.id}
-            />
-          ))}
+          {hotels.map((hotel) => {
+            const reviews = hotel?.reviews;
+            const average = mean(
+              reviews?.map((review) => parseInt(review?.point))
+            );
+
+            return (
+              <HotelCard
+                key={hotel.id}
+                name={hotel.name}
+                address={hotel.address}
+                rating={average}
+                review={reviews?.length}
+                price={hotel.price}
+                bookmarked={false}
+                image={hotel?.images?.[0]}
+                id={hotel.id}
+              />
+            );
+          })}
         </Box>
       </Box>
       {loading && (
