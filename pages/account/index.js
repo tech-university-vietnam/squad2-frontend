@@ -1,5 +1,5 @@
-import { useAppLayout } from "../src/provider/AppLayout";
-import withAuth from "../src/hooks/withAuth";
+import { useAppLayout } from "../../src/provider/AppLayout";
+import withAuth from "../../src/hooks/withAuth";
 import {
   Avatar,
   Box,
@@ -22,10 +22,10 @@ import InfoIcon from "@mui/icons-material/Info";
 import GppGoodIcon from "@mui/icons-material/GppGood";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { ThemeColor } from "../src/config/constants";
+import { ThemeColor } from "../../src/config/constants";
 import EditIcon from "@mui/icons-material/Edit";
-import useCurrentUser from "../src/services/userCurrentUser";
-import routes from "../src/config/routes";
+import useCurrentUser from "../../src/services/userCurrentUser";
+import routes from "../../src/config/routes";
 import Link from "next/link";
 
 const AccountPage = () => {
@@ -36,7 +36,7 @@ const AccountPage = () => {
   const listItems = [
     {
       icon: <PersonIcon />,
-      link: routes.profile,
+      link: routes.edit_profile,
       text: "Edit Profile",
     },
     {

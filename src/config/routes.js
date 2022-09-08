@@ -9,6 +9,7 @@ const routes = {
   welcome: "/welcome",
   profile: "/profile",
   account: "/account",
+  edit_profile: "/account/edit",
   hotel_detail: (id) => `/hotels/${id}`,
   hotel_gallery: (id) => `/hotels/${id}/gallery`,
   hotel_book: (id) => `/hotels/${id}/book`,

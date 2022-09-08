@@ -10,6 +10,7 @@ const CURRENT_USER_GQL = gql`
       phone
       dob
       avatar
+      gender
     }
   }
 `;
