@@ -171,6 +171,7 @@ const ProfilePage = () => {
                       </InputAdornment>
                     ),
                   }}
+                  disabled
                   {...register("email", {
                     required: "Please input your email",
                   })}
