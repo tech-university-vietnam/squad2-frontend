@@ -93,20 +93,7 @@ const ProfilePage = () => {
     },
   });
 
-  const createUserInput = (() => {
-    const { lastname, firstname, gender, email, phone_number, dob } =
-      getValues();
-    return {
-      firstName: firstname,
-      lastName: lastname,
-      gender: gender.toLocaleUpperCase(),
-      email,
-      phone: phone_number,
-      userId: gid,
-    };
-  })();
-
-  const [createUser, { loading, data, error }] = useCreateUser(createUserInput);
+  const [createUser, { loading, data, error }] = useCreateUser();
   const { data: currentUser, refetch } = useCurrentUser();
   const onSubmit = async (data) => {
     setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
@@ -120,6 +107,7 @@ const ProfilePage = () => {
           email,
           phone: phone_number,
           userId: gid,
+          avatar: picture,
         },
       },
     });

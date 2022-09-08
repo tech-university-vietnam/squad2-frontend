@@ -9,6 +9,7 @@ const CURRENT_USER_GQL = gql`
       email
       phone
       dob
+      avatar
     }
   }
 `;

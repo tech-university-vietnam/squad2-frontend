@@ -31,7 +31,7 @@ import Link from "next/link";
 const AccountPage = () => {
   const { logout } = useAppLayout();
   const { data } = useCurrentUser();
-  const currentUser = data.currentUser;
+  const currentUser = data?.currentUser;
 
   const listItems = [
     {
@@ -56,8 +56,6 @@ const AccountPage = () => {
       text: "Help",
     },
   ];
-
-  console.log(currentUser);
 
   return (
     <>
@@ -98,7 +96,7 @@ const AccountPage = () => {
         >
           <Avatar
             alt="Profile picture"
-            // src={picture}
+            src={currentUser?.avatar}
             sx={{
               width: 128,
               height: 128,
@@ -122,10 +120,10 @@ const AccountPage = () => {
           </Fab>
         </Box>
         <Typography variant="h5" textAlign="center" mt={2}>
-          {currentUser.firstName} {currentUser.lastName}
+          {currentUser?.firstName} {currentUser?.lastName}
         </Typography>
         <Typography textAlign="center" mb={2}>
-          {currentUser.email}
+          {currentUser?.email}
         </Typography>
         <Divider variant="middle" />
 
