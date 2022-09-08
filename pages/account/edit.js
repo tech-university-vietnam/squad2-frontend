@@ -1,7 +1,5 @@
 import EmailIcon from "@mui/icons-material/Email";
-import EditIcon from "@mui/icons-material/Edit";
 import {
-  Avatar,
   Box,
   Button,
   Container,
@@ -17,23 +15,19 @@ import {
 } from "@mui/material";
 import { FiChevronLeft } from "react-icons/fi";
 import { useRouter } from "next/router";
-import routes from "../src/config/routes";
+import routes from "../../src/config/routes";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import { COOKIES, ThemeColor } from "../src/config/constants";
-import ErrorField from "../src/components/ErrorField";
+import { ThemeColor } from "../../src/config/constants";
+import ErrorField from "../../src/components/ErrorField";
 import MuiPhoneNumber from "material-ui-phone-number-2";
-import { deleteCookie, setCookie } from "cookies-next";
-import useCreateUser from "../src/services/useRegister";
-import useCurrentUser from "../src/services/userCurrentUser";
+import useCurrentUser from "../../src/services/userCurrentUser";
+import useUpdateUser from "../../src/services/useUpdateUser";
 import { format } from "date-fns";
 
 const CssTextField = styled(TextField)({
-  // background: "#fafafa",
-  // borderRadius: 12,
-  // borderWidth: 0,
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
       borderWidth: 0,
@@ -71,14 +65,8 @@ const ScrollableStack = styled(Stack)`
 
 const ProfilePage = () => {
   const router = useRouter();
-  const {
-    family_name,
-    given_name,
-    picture,
-    email,
-    access_token,
-    sub: gid,
-  } = router.query;
+  const { data } = useCurrentUser();
+  const currentUser = data?.currentUser;
 
   const {
     getValues,
@@ -90,52 +78,46 @@ const ProfilePage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      gender: "",
+      firstname: currentUser?.firstName,
+      lastname: currentUser?.lastName,
+      gender: currentUser?.gender?.toLocaleLowerCase() || "",
+      email: currentUser?.email,
+      phone_number: currentUser?.phone,
+      dob: currentUser?.dob,
     },
   });
 
-  const [createUser, { loading, data, error }] = useCreateUser();
-  const { data: currentUser, refetch } = useCurrentUser();
+  const [updateUser, { loading, error }] = useUpdateUser();
+
   const onSubmit = async (data) => {
-    setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
     const { lastname, firstname, gender, email, phone_number, dob } = data;
     const formatedDob = format(new Date(dob), "yyyy-MM-dd");
-    await createUser({
+    await updateUser({
       variables: {
-        createUserInput: {
+        updateUserInput: {
           firstName: firstname,
           lastName: lastname,
           gender: gender.toLocaleUpperCase(),
           email,
           phone: phone_number,
-          userId: gid,
-          avatar: picture,
           dob: formatedDob,
+          id: currentUser?.id,
         },
       },
     });
-    if (!error) router.push(routes.home);
+    if (!error) router.replace(routes.account);
   };
 
   useEffect(() => {
-    setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
-    setTimeout(() => {
-      refetch()
-        .then(async () => {
-          await refetch();
-          await router.replace(routes.home);
-        })
-        .catch(() => {
-          deleteCookie(COOKIES.ACCESS_TOKEN);
-        });
-    }, 300);
-    reset({
-      lastname: family_name,
-      firstname: given_name,
-      email,
-      gender: "",
-    });
-  }, [router.query]);
+    if (data) {
+      setValue("firstname", currentUser?.firstName);
+      setValue("lastname", currentUser?.lastName);
+      setValue("gender", currentUser?.gender?.toLocaleLowerCase() || "");
+      setValue("email", currentUser?.email);
+      setValue("phone_number", currentUser?.phone);
+      setValue("dob", currentUser?.dob);
+    }
+  }, [data]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -151,44 +133,12 @@ const ProfilePage = () => {
             <FiChevronLeft
               size={24}
               onClick={() => {
-                router.replace(routes.login);
+                router.replace(routes.account);
               }}
             />
-            <Typography variant="h6">Fill your profile</Typography>
+            <Typography variant="h6">Edit Profile</Typography>
           </Stack>
           <ScrollableStack alignItems="center" width="100%">
-            <Box
-              sx={{
-                position: "relative",
-                margin: "auto",
-                width: "fit-content",
-              }}
-            >
-              <Avatar
-                alt="Profile picture"
-                src={picture}
-                sx={{
-                  width: 128,
-                  height: 128,
-                  margin: "auto",
-                  boxShadow: "none",
-                }}
-              />
-              <Fab
-                color="primary"
-                aria-label="edit"
-                size="small"
-                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  right: 0,
-                  borderRadius: "12px",
-                  boxShadow: "none",
-                }}
-              >
-                <EditIcon sx={{ color: "white" }} />
-              </Fab>
-            </Box>
             <Stack width="100%" spacing={2} mt={6}>
               <FormControl variant="filled">
                 <CssTextField
@@ -221,6 +171,7 @@ const ProfilePage = () => {
                       </InputAdornment>
                     ),
                   }}
+                  disabled
                   {...register("email", {
                     required: "Please input your email",
                   })}
@@ -257,6 +208,7 @@ const ProfilePage = () => {
                   {...register("phone_number", {
                     required: "Please input your phone number",
                   })}
+                  value={watch("phone_number")}
                   onChange={(value) => {
                     setValue("phone_number", value);
                   }}
@@ -270,9 +222,7 @@ const ProfilePage = () => {
                   fullWidth
                   {...register("gender", {
                     required: "Please input your gender",
-                    validate: (value) => {
-                      console.log(value);
-                    },
+                    validate: (value) => {},
                   })}
                   value={watch("gender")}
                   input={<SelectInput />}
@@ -292,7 +242,7 @@ const ProfilePage = () => {
             sx={{
               position: "absolute",
               width: "100%",
-              bottom: 32,
+              bottom: 60,
               left: 0,
               right: 0,
               padding: 2,
@@ -301,14 +251,13 @@ const ProfilePage = () => {
             <Button
               style={{
                 width: "100%",
-
                 color: "white",
               }}
               size="large"
               variant="contained"
               type="submit"
             >
-              Continue
+              Update
             </Button>
           </Container>
         </Box>
