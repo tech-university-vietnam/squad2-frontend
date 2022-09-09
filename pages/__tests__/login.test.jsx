@@ -20,7 +20,6 @@ describe("Test Login", () => {
   it("Render login button", () => {
     const button = screen.getByText("Continue with Google");
     userEvent.click(button);
-    console.log(button);
     expect(button).toBeInTheDocument();
   });
 });
