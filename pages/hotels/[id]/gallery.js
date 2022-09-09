@@ -10,8 +10,6 @@ const Gallery = () => {
   const { id } = router.query;
   const { data } = useHotel(+id);
   const hotel = data?.hotel;
-  console.log("data", data);
-
   return (
     <>
       <Box
