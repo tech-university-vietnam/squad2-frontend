@@ -19,7 +19,7 @@ const ReviewCard = (props) => {
               R
             </Avatar>
           }
-          title={`${user?.lastName} ${user?.firstName}`}
+          title={<b>{`${user?.lastName} ${user?.firstName}`}</b>}
           subheader={format(new Date(parseInt(createdAt)), "LLL dd, yyyy")}
         />
         <CardContent
