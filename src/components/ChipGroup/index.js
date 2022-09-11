@@ -19,6 +19,7 @@ const ChipGroup = ({ value, setValue, labels, ...rest }) => {
     >
       {labels.map((label, idx) => (
         <Chip
+          key={label}
           label={label}
           variant={idx === value ? "filled" : "outlined"}
           onClick={() => {

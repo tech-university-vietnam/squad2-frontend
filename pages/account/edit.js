@@ -51,7 +51,7 @@ const SelectInput = styled(InputBase)(({ theme }) => ({
     padding: "16.5px 0px 16.5px 14px",
     "&:focus": {
       borderRadius: 12,
-      borderColor: theme.palette.primary,
+      borderColor: theme.palette?.primary,
     },
   },
 }));

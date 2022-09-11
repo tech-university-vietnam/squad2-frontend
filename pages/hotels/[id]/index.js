@@ -10,12 +10,12 @@ import {
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, A11y } from "swiper";
-import useHotel from "../../src/services/useHotel";
-import styles from "../../styles/Onboard.module.css";
+import useHotel from "../../../src/services/useHotel";
+import styles from "../../../styles/Onboard.module.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Link from "next/link";
-import routes from "../../src/config/routes";
-import IconWithLabel from "../../src/components/IconWithLabel";
+import routes from "../../../src/config/routes";
+import IconWithLabel from "../../../src/components/IconWithLabel";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import HotelIcon from "@mui/icons-material/Hotel";
 import BathtubIcon from "@mui/icons-material/Bathtub";
@@ -32,9 +32,9 @@ import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { ThemeColor } from "../../src/config/constants";
+import { ThemeColor } from "../../../src/config/constants";
 import { useState } from "react";
-import ReviewCard from "../../src/components/ReviewCard";
+import ReviewCard from "../../../src/components/ReviewCard";
 import { slice } from "lodash";
 
 const icons = {

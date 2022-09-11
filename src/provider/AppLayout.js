@@ -6,7 +6,7 @@ import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import routes from "../config/routes";
 import useCurrentUser from "../services/userCurrentUser";
-const AppLayoutContext = React.createContext();
+export const AppLayoutContext = React.createContext();
 
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(undefined);
