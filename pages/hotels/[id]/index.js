@@ -243,7 +243,11 @@ const HotelDetail = () => {
                 { key: "bathroom", value: "1 Bathroom" },
                 { key: "area", value: "4000 sqft" },
               ].map(({ key, value }) => (
-                <IconWithLabel key={key} icon={icons[key].icon} label={value} />
+                <IconWithLabel
+                  key={key}
+                  icon={icons?.[key]?.icon}
+                  label={value}
+                />
               ))}
             </Box>
           </Box>
@@ -269,8 +273,8 @@ const HotelDetail = () => {
                 hotel.facilities.map((key) => (
                   <IconWithLabel
                     key={key}
-                    icon={icons[key].icon}
-                    label={icons[key].name}
+                    icon={icons[key]?.icon}
+                    label={icons[key]?.name}
                     fontSize={12}
                     m={0.5}
                     minWidth={60}

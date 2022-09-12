@@ -8,19 +8,28 @@ import { getUserProfileData } from "../src/config/utils";
 
 const LoginPage = () => {
   const router = useRouter();
+  const callLogin = (token) => {
+    console.log(token);
+    getUserProfileData(token).then((response) => {
+      router.push({
+        pathname: routes.profile,
+        query: { ...response, access_token: token },
+      });
+    });
+  };
+
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log(tokenResponse);
-      getUserProfileData(tokenResponse?.access_token).then((response) => {
-        router.push({
-          pathname: routes.profile,
-          query: { ...response, access_token: tokenResponse?.access_token },
-        });
-      });
+      callLogin(tokenResponse?.access_token);
     },
   });
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.callLogin = callLogin;
+    }
+  }, [typeof window]);
 
   return (
     <Container>

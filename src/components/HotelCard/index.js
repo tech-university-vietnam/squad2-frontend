@@ -30,6 +30,7 @@ const HotelCard = ({
   return (
     <Link style={{ cursor: "pointer" }} href={routes.hotel_detail(id)}>
       <Card
+        className="hotel-card"
         sx={{
           display: "flex",
           borderRadius: 2,
@@ -48,9 +49,15 @@ const HotelCard = ({
 
         <CardContent
           sx={{ display: "flex", justifyContent: "space-between", flex: 1 }}
+          className="hotel-content"
         >
           <Box display="flex" flexDirection="column">
-            <Typography variant="h6" fontWeight={700} color="black">
+            <Typography
+              variant="h6"
+              fontWeight={700}
+              color="black"
+              className="hotel-name"
+            >
               {name}
             </Typography>
             <Typography variant="body1">{address}</Typography>
@@ -64,7 +71,6 @@ const HotelCard = ({
               </Typography>
             </Stack>
           </Box>
-
           <Box display="flex" flexDirection="column">
             <Typography variant="h6" color="primary">
               ${price}

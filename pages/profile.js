@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   Button,
+  CircularProgress,
   Container,
   Fab,
   FormControl,
@@ -19,7 +20,7 @@ import { FiChevronLeft } from "react-icons/fi";
 import { useRouter } from "next/router";
 import routes from "../src/config/routes";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { COOKIES, ThemeColor } from "../src/config/constants";
@@ -71,6 +72,7 @@ const ScrollableStack = styled(Stack)`
 
 const ProfilePage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     family_name,
     given_name,
@@ -118,14 +120,18 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     setCookie(COOKIES.ACCESS_TOKEN, access_token, { maxAge: 3600 });
     setTimeout(() => {
       refetch()
         .then(async () => {
           await refetch();
+          setIsLoading(false);
           await router.replace(routes.home);
         })
         .catch(() => {
+          setIsLoading(false);
+
           deleteCookie(COOKIES.ACCESS_TOKEN);
         });
     }, 300);
@@ -136,6 +142,19 @@ const ProfilePage = () => {
       gender: "",
     });
   }, [router.query]);
+
+  if (isLoading) {
+    return (
+      <Box
+        height="100vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <CircularProgress color="success" />
+      </Box>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -260,6 +279,7 @@ const ProfilePage = () => {
                   onChange={(value) => {
                     setValue("phone_number", value);
                   }}
+                  id="mui-component-phone-number"
                 />
                 <ErrorField attribute={errors?.phone_number} />
               </FormControl>
