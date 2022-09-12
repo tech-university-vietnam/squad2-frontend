@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8000/graphql/";
+export const API_URL = process.env.API_URL;
 
 export const ThemeColor = {
   primary: "#1AB65C",
@@ -11,5 +11,4 @@ export const COOKIES = {
   ACCESS_TOKEN: "access_token",
 };
 
-export const GOOGLE_APP_ID =
-  "722490053093-vo7kav44uk2i1vkbvsoe4hkubiuh0inq.apps.googleusercontent.com";
+export const GOOGLE_APP_ID = process.env.GOOGLE_APP_ID;
