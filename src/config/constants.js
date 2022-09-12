@@ -1,4 +1,4 @@
-export const API_URL = process.env.API_URL;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const ThemeColor = {
   primary: "#1AB65C",
@@ -11,4 +11,4 @@ export const COOKIES = {
   ACCESS_TOKEN: "access_token",
 };
 
-export const GOOGLE_APP_ID = process.env.GOOGLE_APP_ID;
+export const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
