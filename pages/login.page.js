@@ -41,6 +41,7 @@ const LoginPage = () => {
         flexDirection="column"
       >
         <Typography variant="h3" gutterBottom>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
           Let's you in
         </Typography>
         <Button
