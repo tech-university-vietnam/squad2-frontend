@@ -23,7 +23,6 @@ describe("Test BottomNav Component", () => {
 
   it("Render labels", () => {
     expect(screen.getByText(/home/i)).toBeInTheDocument();
-    expect(screen.getByText(/search/i)).toBeInTheDocument();
     expect(screen.getByText(/booking/i)).toBeInTheDocument();
     expect(screen.getByText(/profile/i)).toBeInTheDocument();
   });

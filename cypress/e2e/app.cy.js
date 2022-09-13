@@ -1,6 +1,6 @@
-const page = "http://localhost:3000";
+const page = "https://squad2.megatunger.com";
 const token =
-  "ya29.a0AVA9y1sJAwdVYoPHCm_x8fJXf006UN1Z0_Ncz6k30I4zhDFfcbwiBgtUZmkCvX3MuOCIz2jrxJazosX4s1OdbWXWNAP7glZjLXIlDi758wja2a8br9MXUQ_HtA7dXimhVChjeD5mCEG6hoKHyailfkml56XN9akaCgYKATASARASFQE65dr8EPJRysndYcagLSFKgYTDGg0166";
+  "ya29.a0AVA9y1sjWfb-U6EQANBp_yo9JuXvOcosq44Eygr1Os5VXc0TRMpfw9iv4LprEHgEFulcQ7lAEDoSwVy6BjOXhGF50T6zv6GntmKcSYEJR90GtSFBOFZVdDztSiAkLkRt2RF_KFHQlBDo83V-o872UCTJQ10hADgaCgYKATASARASFQE65dr8tmFra4USJQ-Di28pCVeGHw0166";
 describe("empty spec", () => {
   beforeEach(() => {
     cy.viewport("iphone-xr");
