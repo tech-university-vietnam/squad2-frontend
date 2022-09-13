@@ -1,17 +1,24 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MockedProvider } from "@apollo/client/testing";
-import ProfileScreen from "../profile";
+import ProfileScreen from "../profile.page";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 jest.mock("next/router", () => ({
     useRouter() {
         return {
-            route: "/",
-            pathname: "",
-            query: "",
-            asPath: "",
+            route: "/profile",
+            pathname: "/profile",
+            query: {
+              family_name: 'Smith',
+              given_name: 'David',
+              picture: "",
+              email: "",
+              access_token: "",
+              sub: "",
+            },
+            asPath: "/profile",
         };
     },
 }));
@@ -46,6 +53,13 @@ describe("Test Profile", () => {
 
   it("Render continue button", () => {
     expect(screen.getByText("Continue")).toBeInTheDocument();
+  });
+
+  it("Change phone number", () => {
+    const phoneInput = screen.getByLabelText(/country/i);
+    const value = '+8412345678';
+    fireEvent.change(phoneInput, { target: { value } });
+    expect(phoneInput.value).toBe(value);
   });
     
 });

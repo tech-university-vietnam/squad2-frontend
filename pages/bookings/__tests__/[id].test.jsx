@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import BookingPage from "../index";
+import BookingPage from "../index.page";
 import { client } from "../../../src/services";
 import { ApolloProvider } from "@apollo/client";
 import { globalStore } from "../../../src/store/store";

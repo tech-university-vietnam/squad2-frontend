@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SplashScreen from "../splash";
-import Login from "../login";
+import Login from "../login.page";
 import { GOOGLE_APP_ID } from "../../src/config/constants";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import userEvent from "@testing-library/user-event";

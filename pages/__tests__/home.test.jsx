@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MockedProvider } from "@apollo/client/testing";
-import HomeScreen from "../home";
+import HomeScreen from "../home.page";
 import { AppLayoutContext} from "../../src/provider/AppLayout";
 
 jest.mock("next/router", () => ({

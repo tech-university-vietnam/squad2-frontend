@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import BookScreen from "../book";
+import BookScreen from "../book.page";
 import { ApolloProvider } from "@apollo/client";
 import { Provider } from "react-redux";
 import { globalStore } from "../../../../src/store/store";

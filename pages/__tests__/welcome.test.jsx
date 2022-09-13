@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import WelcomeScreen from "../welcome";
+import WelcomeScreen from "../welcome.page";
 
 describe("Test Welcome Screen", () => {
   it("Render welcome screen", () => {

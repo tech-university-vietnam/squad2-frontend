@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ApolloProvider } from "@apollo/client";
 import { Provider } from "react-redux";
-import Gallery from "../gallery";
+import Gallery from "../gallery.page";
 import { globalStore } from "../../../../src/store/store";
 import { client } from "../../../../src/services";
 

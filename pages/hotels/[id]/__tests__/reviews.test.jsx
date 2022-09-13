@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import ReviewScreen from "../reviews";
+import ReviewScreen from "../reviews.page";
 import { ApolloProvider } from "@apollo/client";
 import { Provider } from "react-redux";
 import { globalStore } from "../../../../src/store/store";

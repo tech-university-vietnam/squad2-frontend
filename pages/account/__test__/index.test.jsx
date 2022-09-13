@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import ProfileScreen from "../index";
+import ProfileScreen from "../index.page";
 import { ApolloProvider } from "@apollo/client";
 import { Provider } from "react-redux";
 import { globalStore } from "../../../src/store/store";
@@ -39,7 +39,10 @@ describe("Test Edit Profile", () => {
 
   it("Render edit profile layout", () => {
     expect(screen.getByText("Edit Profile")).toBeInTheDocument();
-    expect(screen.getByText("Logout")).toBeInTheDocument();
   });
     
+  it("Logout", () => {
+    expect(screen.getByText("Logout")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Logout"));
+  });
 });

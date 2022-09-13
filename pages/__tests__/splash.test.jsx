@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SplashScreen from "../splash";
+import SplashScreen from "../splash.page";
 
 describe("Home", () => {
   it("Render a logo", () => {
