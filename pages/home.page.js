@@ -154,7 +154,7 @@ const Home = () => {
             const reviews = hotel?.reviews;
             const average = mean(
               reviews?.map((review) => parseInt(review?.point))
-            );
+            ).toFixed(1);
 
             return (
               <HotelCard
