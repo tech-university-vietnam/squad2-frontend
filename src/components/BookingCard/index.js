@@ -32,7 +32,7 @@ const BookingCard = ({ booking, ...rest }) => {
           sx={{ width: 86, height: 86, my: 2, ml: 2, borderRadius: 2 }}
         />
 
-        <CardContent>
+        <CardContent className="booking-card">
           <Typography variant="h6" fontWeight={700} color="black">
             {booking.hotel.name}
           </Typography>

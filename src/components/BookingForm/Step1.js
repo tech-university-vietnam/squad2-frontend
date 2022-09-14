@@ -100,7 +100,13 @@ const Step1 = ({
                 minDate={new Date()}
                 inputFormat="MM/dd/yyyy"
                 value={watch("checkIn")}
-                renderInput={(params) => <CssTextField fullWidth {...params} />}
+                renderInput={(params) => (
+                  <CssTextField
+                    fullWidth
+                    {...params}
+                    className="check-in-input"
+                  />
+                )}
                 {...register("checkIn", {
                   required: "Please input",
                 })}
@@ -118,7 +124,13 @@ const Step1 = ({
                 inputFormat="MM/dd/yyyy"
                 minDate={watch("checkIn")}
                 value={watch("checkOut")}
-                renderInput={(params) => <CssTextField fullWidth {...params} />}
+                renderInput={(params) => (
+                  <CssTextField
+                    fullWidth
+                    {...params}
+                    className="check-out-input"
+                  />
+                )}
                 {...register("checkOut", {
                   required: "Please input",
                 })}
@@ -140,7 +152,7 @@ const Step1 = ({
             -
           </div>
           <div className="quantity">{guests}</div>
-          <div className="button" onClick={increase}>
+          <div className="button button-increase" onClick={increase}>
             +
           </div>
         </ChangeQuantityGroup>

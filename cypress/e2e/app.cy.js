@@ -1,6 +1,6 @@
 const page = "https://squad2.megatunger.com";
 const token =
-  "ya29.a0AVA9y1sjWfb-U6EQANBp_yo9JuXvOcosq44Eygr1Os5VXc0TRMpfw9iv4LprEHgEFulcQ7lAEDoSwVy6BjOXhGF50T6zv6GntmKcSYEJR90GtSFBOFZVdDztSiAkLkRt2RF_KFHQlBDo83V-o872UCTJQ10hADgaCgYKATASARASFQE65dr8tmFra4USJQ-Di28pCVeGHw0166";
+  "ya29.a0AVA9y1touYQowaNoUbf2gS_q2MkV0isYbdpvZuZC9cfXcLaRS52RwZW12HBmdnI94W-0nCKtdwT5A8L5oJft99BnBFryTOLSBXHmmdmqI8oD0EnxJTJcdueQ9HgEnsBAZw_ZWld4MBo-I51x3R4Upzv3pPOla7saCgYKATASARASFQE65dr83vEMlH5eSMhJDfOI6rk9tg0166";
 describe("empty spec", () => {
   beforeEach(() => {
     cy.viewport("iphone-xr");
@@ -28,6 +28,20 @@ describe("empty spec", () => {
   it("Display Home Screen with Hotels", () => {
     cy.get(".hotel-content").should("exist");
     cy.get(".hotel-card").first().click();
+    cy.findByText("Book Now!").click();
+    cy.wait(500);
+    const dates = ["09/23/2022", "09/26/2022"];
+    cy.get("input").each((element, index) => {
+      cy.get(element).type(dates[index]);
+    });
+    cy.findByText("+").click();
+    cy.findByText("Continue").click();
+    cy.findByText("Mr.").click();
+    cy.findByText("Continue").click();
+    cy.findByText("Pay by Cash when arrive").click();
+    cy.findByText("Continue").click();
+    cy.findByText("Booking").click();
+    cy.visit(`${page}/bookings`);
   });
 
   // it("Register", () => {
@@ -40,11 +54,11 @@ describe("empty spec", () => {
   //     cy.findByText("Continue").click();
   //   }
   // });
-  // it("Logout", () => {
-  //   cy.findByText("Profile").click();
-  //   cy.findByText("Logout").click();
-  //   cy.wait(1000);
-  //
-  //   cy.findByText("Continue with Google").should("exist");
-  // });
+  it("Logout", () => {
+    cy.findByText("Profile").click();
+    cy.findByText("Logout").click();
+    cy.wait(1000);
+
+    cy.findByText("Continue with Google").should("exist");
+  });
 });
