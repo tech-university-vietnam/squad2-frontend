@@ -48,19 +48,38 @@ const HotelCard = ({
         />
 
         <CardContent
-          sx={{ display: "flex", justifyContent: "space-between", flex: 1 }}
+          sx={{
+            display: "flex",
+            flex: 1,
+            minWidth: 0,
+            justifyContent: "space-between",
+          }}
           className="hotel-content"
         >
-          <Box display="flex" flexDirection="column">
+          <Box sx={{ minWidth: 0 }}>
             <Typography
               variant="h6"
               fontWeight={700}
               color="black"
               className="hotel-name"
+              sx={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
             >
               {name}
             </Typography>
-            <Typography variant="body1">{address}</Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {address}
+            </Typography>
             <Stack spacing={0.5} direction="row" alignItems="flex-end">
               <StarIcon sx={{ color: "yellow" }} />
               <Typography color="primary" fontWeight={600}>
@@ -71,7 +90,7 @@ const HotelCard = ({
               </Typography>
             </Stack>
           </Box>
-          <Box display="flex" flexDirection="column">
+          <Box minWidth="max-content">
             <Typography variant="h6" color="primary">
               ${price}
             </Typography>
@@ -79,9 +98,9 @@ const HotelCard = ({
               / night
             </Typography>
             {bookmarked ? (
-              <BookmarkIcon color="primary" />
+              <BookmarkIcon color="primary" sx={{ display: "block" }} />
             ) : (
-              <BookmarkBorderOutlinedIcon />
+              <BookmarkBorderOutlinedIcon sx={{ display: "block" }} />
             )}
           </Box>
         </CardContent>
