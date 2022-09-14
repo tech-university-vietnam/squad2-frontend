@@ -46,7 +46,7 @@ const BookingPage = () => {
           </IconButton>
         </Link>
       </Box>
-      <Box p={2} pt={10} pb={8}>
+      <Box p={2} pt={12} pb={8}>
         {!data || data.bookings.length == 0 ? (
           <>
             <div style={{ textAlign: "center", marginTop: 72 }}>
