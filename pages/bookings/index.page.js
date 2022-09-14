@@ -2,12 +2,14 @@ import { Avatar, Box, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import SearchIcon from "@mui/icons-material/Search";
 import routes from "../../src/config/routes";
-import { ThemeColor } from "../../src/config/constants";
 import BookingCard from "../../src/components/BookingCard";
 import useBookings from "../../src/services/useBookings";
+import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
+import { ThemeColor } from "../../src/config/constants";
 
 const BookingPage = () => {
-  const { data } = useBookings();
+  const { data: user } = useBookings();
+  const data = user?.currentUser;
   return (
     <>
       <Box
@@ -27,7 +29,12 @@ const BookingPage = () => {
       >
         <Box display="flex">
           <Avatar
-            sx={{ bgcolor: ThemeColor.primary, width: 40, height: 40, mr: 1.5 }}
+            sx={{
+              bgcolor: ThemeColor.primary,
+              width: 40,
+              height: 40,
+              mr: 1.5,
+            }}
             variant="rounded"
             src="/logo.png"
           />
@@ -40,10 +47,26 @@ const BookingPage = () => {
         </Link>
       </Box>
       <Box p={2} pt={10} pb={8}>
-        {data &&
+        {!data || data.bookings.length == 0 ? (
+          <>
+            <div style={{ textAlign: "center" }}>
+              <DescriptionRoundedIcon
+                sx={{ width: 80, height: 80, color: "#e0e0e0" }}
+              />
+            </div>
+            <Typography
+              variant="body1"
+              textAlign="center"
+              sx={{ color: "#d0d0d0" }}
+            >
+              No data
+            </Typography>
+          </>
+        ) : (
           data.bookings.map((booking) => (
             <BookingCard booking={booking} key={booking.id} />
-          ))}
+          ))
+        )}
       </Box>
     </>
   );
