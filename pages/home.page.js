@@ -36,6 +36,7 @@ const Home = () => {
   const totalPages = data?.hotels.meta.totalPages || 1;
 
   const loadMore = async () => {
+    console.log("load more", page);
     setPage(page + 1);
     const data = await refetch({
       listHotelsInput: {
@@ -65,39 +66,31 @@ const Home = () => {
 
   useEffect(() => {
     setHotels([]);
-    setPage(0);
-  }, [filter]);
-
-  useEffect(() => {
-    setPage(0);
+    setPage(1);
     refetch({
       listHotelsInput: {
         paging: {
           limit,
-          page,
+          page: 1,
+        },
+        orderBy,
+        filterBy,
+      },
+    }).then((data) => setHotels(data?.data?.hotels?.items || []));
+  }, [filter]);
+
+  useEffect(() => {
+    refetch({
+      listHotelsInput: {
+        paging: {
+          limit,
+          page: 1,
         },
         orderBy,
         filterBy,
       },
     }).then((data) => setHotels(data?.data?.hotels?.items || []));
   }, [filterBy]);
-
-  useEffect(() => {
-    refetch({
-      listHotelsInput: {
-        paging: {
-          limit,
-          page: 0,
-        },
-        orderBy,
-        filterBy,
-      },
-    }).then((data) => {
-      setHotels(data?.data?.hotels?.items || []);
-    });
-    // setPage(1);
-    // window.scrollTo(0, 0);
-  }, [filter]);
 
   return (
     <>
