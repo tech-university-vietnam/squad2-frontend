@@ -49,7 +49,7 @@ const BookingPage = () => {
       <Box p={2} pt={10} pb={8}>
         {!data || data.bookings.length == 0 ? (
           <>
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center", marginTop: 72 }}>
               <DescriptionRoundedIcon
                 sx={{ width: 80, height: 80, color: "#e0e0e0" }}
               />
