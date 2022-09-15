@@ -12,6 +12,7 @@ import useCreateBooking from "../../../src/services/useCreateBooking";
 import { omit } from "lodash";
 import { useRouter } from "next/router";
 import useHotel from "../../../src/services/useHotel";
+import withAuth from "../../../src/hooks/withAuth";
 
 const PageTitle = styled(Typography)`
   font-size: 20px;
@@ -113,4 +114,4 @@ const BookFormPage = () => {
   );
 };
 
-export default BookFormPage;
+export default withAuth(BookFormPage);

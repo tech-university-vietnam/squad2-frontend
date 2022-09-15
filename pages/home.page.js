@@ -135,9 +135,11 @@ const Home = () => {
         onScroll={handleScroll}
         sx={{ overflow: "scroll", height: "100vh" }}
       >
-        <Typography variant="h5" fontWeight={700} mb={2}>
-          Hello, {name} 👋!
-        </Typography>
+        {name && (
+          <Typography variant="h5" fontWeight={700} mb={2}>
+            Hello, {name} 👋!
+          </Typography>
+        )}
 
         <SearchBar text={filterBy} setText={setFilterBy} />
         <ChipGroup value={filter} labels={filters} setValue={setFilter} />
@@ -183,4 +185,5 @@ const Home = () => {
   );
 };
 
-export default withAuth(Home);
+// export default withAuth(Home);
+export default Home;
