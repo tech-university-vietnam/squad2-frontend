@@ -155,6 +155,7 @@ const Step2 = ({
           <DesktopDatePicker
             inputFormat="MM/dd/yyyy"
             value={watch("dob")}
+            maxDate={new Date()}
             renderInput={(params) => <CssTextField fullWidth {...params} />}
             {...register("dob", {
               required: "Please input your date of birth",
@@ -187,6 +188,8 @@ const Step2 = ({
         <FormControl variant="filled">
           <StyledMuiPhoneNumber
             defaultCountry="vn"
+            disableAreaCodes
+            countryCodeEditable={false}
             variant="outlined"
             sx={{
               "& .MuiInputBase-root": {
@@ -197,9 +200,19 @@ const Step2 = ({
             }}
             {...register("phone", {
               required: "Please input your phone number",
+              validate: (value) => {
+                return (
+                  !value.startsWith("+84") ||
+                  value.length == 12 ||
+                  "Invalid phone number"
+                );
+              },
             })}
             onChange={(value) => {
-              setValue("phone", value);
+              if (value.startsWith("+84"))
+                setValue("phone", value, {
+                  shouldValidate: true,
+                });
             }}
             value={watch("phone")}
           />
