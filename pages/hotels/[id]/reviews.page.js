@@ -1,54 +1,14 @@
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useRouter } from "next/router";
 import useHotel from "../../../src/services/useHotel";
-import { slice } from "lodash";
 import ReviewCard from "../../../src/components/ReviewCard";
 import StarIcon from "@mui/icons-material/Star";
 import React, { useMemo, useState } from "react";
 import styled from "@emotion/styled";
-import { ThemeColor } from "../../../src/config/constants";
+import StyledChip from "../../../src/components/StyledChip";
 
 const options = ["All", "5", "4", "3", "2", "1"];
-
-const Chip = styled.div`
-  padding: 8px 12px;
-  border-radius: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
-  width: 80px;
-
-  color: ${ThemeColor.primary};
-  border: 1px solid ${ThemeColor.primary};
-  transition: 0.3s;
-
-  ${(props) =>
-    props.selected &&
-    `
-    color: white;
-    background-color: ${ThemeColor.primary};
-    svg {
-      color: white;
-    }
-  `}
-
-  svg {
-    color: 1px solid ${ThemeColor.primary};
-  }
-
-  &:hover {
-    color: white;
-    background-color: ${ThemeColor.primary};
-    svg {
-      color: white;
-    }
-  }
-`;
 
 const HorizontalScroll = styled.div`
   overflow-x: scroll;
@@ -73,7 +33,9 @@ const Gallery = () => {
     if (currentFilter === options[0]) {
       return reviews;
     }
-    return reviews?.filter((review) => review.rating === +currentFilter);
+    return reviews?.filter((review) => {
+      return +review.point === +currentFilter;
+    });
   }, [data, currentFilter]);
 
   return (
@@ -133,10 +95,10 @@ const Gallery = () => {
                     }}
                     onClick={() => setCurrentFilter(item)}
                   >
-                    <Chip selected={item === currentFilter}>
+                    <StyledChip selected={item === currentFilter}>
                       <StarIcon fontSize="small" sx={{ marginRight: "8px" }} />
                       {item}
-                    </Chip>
+                    </StyledChip>
                   </div>
                 );
               })}

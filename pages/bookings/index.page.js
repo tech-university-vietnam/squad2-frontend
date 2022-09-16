@@ -6,6 +6,7 @@ import BookingCard from "../../src/components/BookingCard";
 import useBookings from "../../src/services/useBookings";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import { ThemeColor } from "../../src/config/constants";
+import withAuth from "../../src/hooks/withAuth";
 
 const BookingPage = () => {
   const { data: user } = useBookings();
@@ -72,4 +73,4 @@ const BookingPage = () => {
   );
 };
 
-export default BookingPage;
+export default withAuth(BookingPage);

@@ -9,7 +9,7 @@ const Welcome = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       router.replace(routes.onboard);
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -25,7 +25,7 @@ const Welcome = () => {
       sx={{
         backgroundSize: "cover",
         backgroundImage:
-          "url('https://source.unsplash.com/random/1280x720?travel')",
+          "url('https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=1287')",
       }}
     >
       <Container maxWidth="md">

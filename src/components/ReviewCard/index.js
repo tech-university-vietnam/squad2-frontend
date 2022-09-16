@@ -6,9 +6,11 @@ import {
   Typography,
 } from "@mui/material";
 import { format } from "date-fns";
+import StarIcon from "@mui/icons-material/Star";
+import StyledChip from "../StyledChip";
 
 const ReviewCard = (props) => {
-  const { id, user, createdAt, content } = props;
+  const { id, user, createdAt, content, point } = props;
   const avatar = `https://i.pravatar.cc/150?u=review_${id}`;
   return (
     <div>
@@ -21,6 +23,12 @@ const ReviewCard = (props) => {
           }
           title={<b>{`${user?.lastName} ${user?.firstName}`}</b>}
           subheader={format(new Date(parseInt(createdAt)), "LLL dd, yyyy")}
+          action={
+            <StyledChip selected sx={{ marginRight: "8px" }}>
+              <StarIcon fontSize="small" />
+              {point}
+            </StyledChip>
+          }
         />
         <CardContent
           sx={{

@@ -10,17 +10,17 @@ import { ThemeColor } from "../src/config/constants";
 
 const images = [
   {
-    img: "https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6",
+    img: "https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?w=1200",
     title: "Travel safely, comfortably, & easily",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus eu ipsum sed facilisis. Donec enim lorem, ultricies ac vestibulum tempus, posuere ac metus.",
   },
   {
-    img: "https://images.unsplash.com/photo-1506929562872-bb421503ef21",
+    img: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1200",
     title: "Find the best hotels for your vacation",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus eu ipsum sed facilisis. Donec enim lorem, ultricies ac vestibulum tempus, posuere ac metus.",
   },
   {
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200",
     title: "Let's discover the world with us",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus eu ipsum sed facilisis. Donec enim lorem, ultricies ac vestibulum tempus, posuere ac metus.",
   },

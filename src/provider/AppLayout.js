@@ -70,7 +70,9 @@ const AppLayout = ({ children }) => {
     <AppLayoutContext.Provider value={{ isLoggedIn, logout }}>
       <Container maxWidth="md" sx={{ height: "100vh", p: 0 }}>
         {children}
-        {isLoggedIn && !noDisplay && <BottomNav />}
+        {(router.asPath == routes.home || (isLoggedIn && !noDisplay)) && (
+          <BottomNav />
+        )}
       </Container>
     </AppLayoutContext.Provider>
   );
