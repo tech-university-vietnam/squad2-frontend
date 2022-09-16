@@ -13,6 +13,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import StarIcon from "@mui/icons-material/Star";
 import routes from "../../config/routes";
 import Link from "next/link";
+import Image from "next/image";
 
 const StyledCard = styled(Card)``;
 
@@ -40,12 +41,15 @@ const HotelCard = ({
         elevation={12}
         {...rest}
       >
-        <CardMedia
-          component="img"
-          image={image}
-          alt="Hotel image"
-          sx={{ width: 86, height: 86, my: 2, ml: 2, borderRadius: 2 }}
-        />
+        <div style={{ marginLeft: "8px" }}>
+          <Image
+            src={image}
+            alt="Hotel image"
+            width={90}
+            height={86}
+            style={{ borderRadius: 8, paddingLeft: "8px", marginLeft: "8px" }}
+          />
+        </div>
 
         <CardContent
           sx={{
