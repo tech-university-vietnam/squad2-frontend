@@ -9,7 +9,7 @@ const Welcome = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       router.replace(routes.onboard);
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timeout);
   }, []);

@@ -33,7 +33,9 @@ const Gallery = () => {
     if (currentFilter === options[0]) {
       return reviews;
     }
-    return reviews?.filter((review) => review.rating === +currentFilter);
+    return reviews?.filter((review) => {
+      return +review.point === +currentFilter;
+    });
   }, [data, currentFilter]);
 
   return (

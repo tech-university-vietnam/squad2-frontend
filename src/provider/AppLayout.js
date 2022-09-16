@@ -33,7 +33,7 @@ const AppLayout = ({ children }) => {
   const logout = () => {
     setIsLoggedIn(false);
     deleteCookie(COOKIES.ACCESS_TOKEN);
-    window.location.href = routes.home;
+    window.location.href = routes.login;
   };
 
   const noDisplay =
