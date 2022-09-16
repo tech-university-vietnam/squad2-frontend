@@ -76,7 +76,7 @@ const BookFormPage = () => {
       firstname: currentUser?.currentUser?.firstName,
       email: currentUser?.currentUser?.email,
       phone: currentUser?.currentUser?.phone,
-      dob: null,
+      dob: currentUser?.currentUser?.dob,
       price: hotelData?.hotel?.price || 0,
     });
   }, [currentUser, hotelData]);
